@@ -8,20 +8,14 @@ function Department() {
 
 	useEffect(() => {
 		axios.get(`${path}/DB/members.json`).then((json) => {
-			console.log(json.data.members);
 			setMembers(json.data.members);
 		});
 	}, []);
-
-	useEffect(() => {
-		console.log(Members);
-	}, [Members]);
 
 	return (
 		<Layout name={'Department'}>
 			<div className='wrap'>
 				{Members.map((member, idx) => {
-					console.log(member);
 					return (
 						<article key={idx}>
 							<div className='inner'>
