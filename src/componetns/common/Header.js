@@ -1,10 +1,10 @@
 import { NavLink, Link } from 'react-router-dom';
 
-function Header() {
+function Header({ type }) {
 	const style = { color: 'hotpink' };
 
 	return (
-		<header>
+		<header className={type}>
 			<div className='inner'>
 				<h1>
 					<Link to='/'>DCODELAB</Link>

@@ -1,6 +1,7 @@
 header {
 	width: 100%;
-	background: #222;
+	background: #fff;
+	border-bottom: 1px solid #aaa;
 
 	.inner {
 		width: 1180px;
@@ -16,7 +17,7 @@ header {
 			a {
 				font-size: $fontL;
 				font-family: 'arial';
-				color: #fff;
+				color: #333;
 			}
 		}
 
@@ -33,9 +34,27 @@ header {
 					padding: 20px 30px;
 					font-size: $fontM;
 					font-family: 'arial';
-					color: #fff;
+					color: #555;
 					font-weight: bold;
 				}
+			}
+		}
+	}
+
+	&.main {
+		background: transparent;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		z-index: 2;
+
+		.inner {
+			h1 a {
+				color: #fff;
+			}
+
+			#gnb li a {
+				color: #eee;
 			}
 		}
 	}

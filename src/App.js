@@ -20,13 +20,19 @@ function App() {
 		<>
 			<Switch>
 				<Route exact path='/'>
-					<Header />
+					{/* 메인용 header */}
+					<Header type={'main'} />
 					<Visual />
 					<News />
 					<Pics />
 					<Vids />
 				</Route>
-				<Route path='/' component={Header} />
+
+				{/* 서브용 header */}
+				<Route
+					path='/'
+					render={() => <Header type={'sub'} />}
+				/>
 			</Switch>
 
 			<Route path='/department' component={Department} />
