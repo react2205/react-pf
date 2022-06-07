@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-function Layout({ name }) {
+function Layout({ name, children }) {
 	const frame = useRef(null);
 
 	useEffect(() => {
@@ -12,6 +12,7 @@ function Layout({ name }) {
 			<figure></figure>
 			<div className='inner'>
 				<h2>{name}</h2>
+				{children}
 			</div>
 		</section>
 	);
