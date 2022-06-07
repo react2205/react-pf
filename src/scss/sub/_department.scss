@@ -49,3 +49,27 @@
 		}
 	}
 }
+
+@media screen and (max-width: $tablet) {
+	.Department {
+		.inner {
+			.wrap {
+				article {
+					width: 50%;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $mp) {
+	.Department {
+		.inner {
+			.wrap {
+				article {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
