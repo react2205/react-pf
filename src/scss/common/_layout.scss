@@ -2,6 +2,8 @@
 	figure {
 		height: 250px;
 		background: gray;
+		opacity: 0;
+		transition: 1s;
 	}
 
 	> .inner {
@@ -9,11 +11,33 @@
 		min-height: 800px;
 		margin: 100px auto;
 		position: relative;
+		opacity: 0;
+		transform: translateY(100px);
+		transition: 1s;
 
 		h2 {
 			font-weight: normal;
 			font-size: $fontXXL;
 			color: #666;
+			opacity: 0;
+			transition: 0.5s 1s;
+			transform: translateX(-100px);
+		}
+	}
+
+	&.on {
+		figure {
+			opacity: 1;
+		}
+
+		> .inner {
+			transform: translateY(0px);
+			opacity: 1;
+
+			h2 {
+				transform: translateX(0px);
+				opacity: 1;
+			}
 		}
 	}
 }
