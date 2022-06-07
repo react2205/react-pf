@@ -18,10 +18,21 @@
 		h2 {
 			font-weight: normal;
 			font-size: $fontXXL;
-			color: #666;
+			font-family: 'work sans';
+			color: #333;
+			margin-bottom: 70px;
 			opacity: 0;
 			transition: 0.5s 1s;
 			transform: translateX(-100px);
+
+			&::after {
+				content: '';
+				display: block;
+				width: 60px;
+				height: 1px;
+				background: #555;
+				margin-top: 20px;
+			}
 		}
 	}
 
