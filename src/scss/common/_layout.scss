@@ -1,0 +1,13 @@
+.content {
+	figure {
+		height: 250px;
+		background: gray;
+	}
+
+	> .inner {
+		width: 1180px;
+		min-height: 800px;
+		margin: 100px auto;
+		position: relative;
+	}
+}
