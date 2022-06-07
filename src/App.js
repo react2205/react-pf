@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
 import Header from './componetns/common/Header';
 import Footer from './componetns/common/Footer';
@@ -18,14 +18,16 @@ import Join from './componetns/sub/Join';
 function App() {
 	return (
 		<>
-			<Header />
-
-			<Route exact path='/'>
-				<Visual />
-				<News />
-				<Pics />
-				<Vids />
-			</Route>
+			<Switch>
+				<Route exact path='/'>
+					<Header />
+					<Visual />
+					<News />
+					<Pics />
+					<Vids />
+				</Route>
+				<Route path='/' component={Header} />
+			</Switch>
 
 			<Route path='/department' component={Department} />
 			<Route path='/community' component={Community} />
