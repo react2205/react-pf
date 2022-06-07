@@ -39,6 +39,15 @@ header {
 				}
 			}
 		}
+
+		.fa-bars {
+			position: absolute;
+			bottom: 20px;
+			right: 30px;
+			font-size: $fontXL;
+			color: #555;
+			display: none;
+		}
 	}
 
 	&.main {
@@ -55,6 +64,29 @@ header {
 
 			#gnb li a {
 				color: #eee;
+			}
+
+			.fa-bars {
+				color: #fff;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $tablet) {
+	header {
+		.inner {
+			width: 100%;
+
+			h1 {
+				left: 30px;
+			}
+
+			#gnb {
+				display: none;
+			}
+			.fa-bars {
+				display: block;
 			}
 		}
 	}
