@@ -42,14 +42,15 @@ function Location() {
 	const [Location, setLocation] = useState(null);
 	const [Traffic, setTraffic] = useState(false);
 	const [Info, setInfo] = useState(info);
+	const [Index, setIndex] = useState(0);
 	const container = useRef(null);
 	const option = {
-		center: Info[2].latlng,
+		center: Info[Index].latlng,
 		level: 3,
 	};
-	const imageSrc = Info[2].imgSrc;
-	const imageSize = Info[2].imgSize;
-	const imageOption = Info[2].imgPos;
+	const imageSrc = Info[Index].imgSrc;
+	const imageSize = Info[Index].imgSize;
+	const imageOption = Info[Index].imgPos;
 
 	//마커이미지 인스턴스 생성
 	const markerImage = new kakao.maps.MarkerImage(
@@ -59,7 +60,7 @@ function Location() {
 	);
 
 	//위치 인스턴스 생성
-	const markerPosition = Info[2].latlng;
+	const markerPosition = Info[Index].latlng;
 
 	//위치 인스턴스 값을 인수로 해서 마커 인스턴스 생성
 	const marker = new kakao.maps.Marker({
@@ -78,7 +79,7 @@ function Location() {
 		marker.setMap(map_instance);
 		//인스턴스값을 state에 담아서 관리
 		setLocation(map_instance);
-	}, []);
+	}, [Index]);
 
 	useEffect(() => {
 		if (Location) {
@@ -95,9 +96,18 @@ function Location() {
 	return (
 		<Layout name={'Location'}>
 			<div id='map' ref={container}></div>
-			<button onClick={() => setTraffic(!Traffic)}>
-				{Traffic ? 'Traffic OFF' : 'Traffic ON'}
-			</button>
+
+			<div className='btnSet'>
+				<button onClick={() => setTraffic(!Traffic)}>
+					{Traffic ? 'Traffic OFF' : 'Traffic ON'}
+				</button>
+
+				<ul className='branch'>
+					<li onClick={() => setIndex(0)}>코엑스</li>
+					<li onClick={() => setIndex(1)}>올림픽공원</li>
+					<li onClick={() => setIndex(2)}>서울시청</li>
+				</ul>
+			</div>
 		</Layout>
 	);
 }
