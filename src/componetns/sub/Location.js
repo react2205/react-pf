@@ -88,6 +88,20 @@ function Location() {
 		//인스턴스값을 state에 담아서 관리
 		setLocation(map_instance);
 
+		//지도타입 컨트롤바 출력
+		const mapTypeControl = new kakao.maps.MapTypeControl();
+		map_instance.addControl(
+			mapTypeControl,
+			kakao.maps.ControlPosition.TOPLEFT
+		);
+
+		//지도 줌 컨트롤바 출력
+		const zoomControl = new kakao.maps.ZoomControl();
+		map_instance.addControl(
+			zoomControl,
+			kakao.maps.ControlPosition.LEFT
+		);
+
 		//브라우저 리사이즈시 마커 중앙 유지
 		window.addEventListener('resize', handleResize);
 
