@@ -44,6 +44,7 @@ function Location() {
 	const [Info, setInfo] = useState(info);
 	const [Index, setIndex] = useState(0);
 	const container = useRef(null);
+	const btns = useRef(null);
 	const option = {
 		center: Info[Index].latlng,
 		level: 3,
@@ -79,6 +80,13 @@ function Location() {
 		marker.setMap(map_instance);
 		//인스턴스값을 state에 담아서 관리
 		setLocation(map_instance);
+
+		//버튼 활성화
+		/*
+		for (const btn of btns.current.children)
+			btn.classList.remove('on');
+		btns.current.children[Index].classList.add('on');
+		*/
 	}, [Index]);
 
 	useEffect(() => {
@@ -102,10 +110,15 @@ function Location() {
 					{Traffic ? 'Traffic OFF' : 'Traffic ON'}
 				</button>
 
-				<ul className='branch'>
+				<ul className='branch' ref={btns}>
 					{Info.map((info, idx) => {
+						let on = '';
+						Index === idx ? (on = 'on') : (on = '');
 						return (
-							<li key={idx} onClick={() => setIndex(idx)}>
+							<li
+								key={idx}
+								onClick={() => setIndex(idx)}
+								className={on}>
 								{info.title}
 							</li>
 						);
