@@ -42,7 +42,9 @@ function Youtube() {
 								</p>
 								<span>{date.split('T')[0]}</span>
 							</div>
-							<div className='pic'>
+							<div
+								className='pic'
+								onClick={() => setOpen(true)}>
 								<img
 									src={vid.snippet.thumbnails.standard.url}
 									alt={vid.title}
@@ -52,7 +54,7 @@ function Youtube() {
 					);
 				})}
 			</Layout>
-			<Popup />
+			{Open ? <Popup setOpen={setOpen} /> : null}
 		</>
 	);
 }
