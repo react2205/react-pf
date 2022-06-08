@@ -71,6 +71,8 @@ function Location() {
 	//최종 마커 호출
 
 	useEffect(() => {
+		container.current.innerHTML = '';
+
 		//지도 인스턴스 생성
 		const map_instance = new kakao.maps.Map(
 			container.current,
