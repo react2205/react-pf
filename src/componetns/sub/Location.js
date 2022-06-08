@@ -103,9 +103,13 @@ function Location() {
 				</button>
 
 				<ul className='branch'>
-					<li onClick={() => setIndex(0)}>코엑스</li>
-					<li onClick={() => setIndex(1)}>올림픽공원</li>
-					<li onClick={() => setIndex(2)}>서울시청</li>
+					{Info.map((info, idx) => {
+						return (
+							<li key={idx} onClick={() => setIndex(idx)}>
+								{info.title}
+							</li>
+						);
+					})}
 				</ul>
 			</div>
 		</Layout>
