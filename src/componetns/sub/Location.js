@@ -6,7 +6,7 @@ function Location() {
 	const { kakao } = window;
 	const info = [
 		{
-			title: '삼성동 코엑스',
+			title: '코엑스',
 			latlng: new kakao.maps.LatLng(
 				37.51270773913474,
 				127.06069417509839
@@ -18,7 +18,7 @@ function Location() {
 			},
 		},
 		{
-			title: '올림픽 공원',
+			title: '올림픽공원',
 			latlng: new kakao.maps.LatLng(
 				37.5188715541183,
 				127.12528957675329
@@ -30,7 +30,7 @@ function Location() {
 			},
 		},
 		{
-			title: '서울 시청',
+			title: '서울시청',
 			latlng: new kakao.maps.LatLng(37.566826, 126.9786567),
 			imgSrc: `${process.env.PUBLIC_URL}/img/marker3.png`,
 			imgSize: new kakao.maps.Size(232, 99),

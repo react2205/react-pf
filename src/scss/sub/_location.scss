@@ -26,6 +26,7 @@
 				li {
 					display: flex;
 					align-items: center;
+					justify-content: center;
 					cursor: pointer;
 					border: 1px solid #888;
 					height: 30px;
@@ -40,6 +41,30 @@
 						background: #444;
 						border: 1px solid #444;
 						color: #fff;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $mp) {
+	.Location {
+		.inner {
+			.btnSet {
+				button {
+					width: 100%;
+					margin-bottom: 10px;
+				}
+
+				ul {
+					width: 100%;
+					justify-content: space-between;
+
+					li {
+						margin: 0px;
+						width: 33%;
+						padding: 0px;
 					}
 				}
 			}
