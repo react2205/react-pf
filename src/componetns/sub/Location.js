@@ -1,9 +1,21 @@
 import Layout from '../common/Layout';
+import { useEffect, useRef } from 'react';
 
 function Location() {
+	const { kakao } = window;
+	const container = useRef(null);
+	const option = {
+		center: new kakao.maps.LatLng(33.450701, 126.570667),
+		level: 3,
+	};
+
+	useEffect(() => {
+		new kakao.maps.Map(container.current, option);
+	}, []);
+
 	return (
 		<Layout name={'Location'}>
-			<p>로케이션 컨텐츠 페이지 입니다.</p>
+			<div id='map' ref={container}></div>
 		</Layout>
 	);
 }
