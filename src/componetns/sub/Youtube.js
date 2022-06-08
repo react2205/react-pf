@@ -1,9 +1,11 @@
 import Layout from '../common/Layout';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Popup from '../common/Popup';
 
 function Youtube() {
 	const [Vids, setVids] = useState([]);
+	const [Open, setOpen] = useState(false);
 
 	useEffect(() => {
 		const key = 'AIzaSyC77Pd__ju0Wqx_Umc-IuW7Cn2mWi_HVsk';
@@ -18,37 +20,40 @@ function Youtube() {
 	}, []);
 
 	return (
-		<Layout name={'Youtube'}>
-			{Vids.map((vid, idx) => {
-				const tit = vid.snippet.title;
-				const desc = vid.snippet.description;
-				const date = vid.snippet.publishedAt;
+		<>
+			<Layout name={'Youtube'}>
+				{Vids.map((vid, idx) => {
+					const tit = vid.snippet.title;
+					const desc = vid.snippet.description;
+					const date = vid.snippet.publishedAt;
 
-				return (
-					<article key={idx}>
-						<h3>
-							{tit.length > 50
-								? tit.substr(0, 30) + '...'
-								: tit}
-						</h3>
-						<div className='txt'>
-							<p>
-								{desc.length > 200
-									? desc.substr(0, 200) + '...'
-									: desc}
-							</p>
-							<span>{date.split('T')[0]}</span>
-						</div>
-						<div className='pic'>
-							<img
-								src={vid.snippet.thumbnails.standard.url}
-								alt={vid.title}
-							/>
-						</div>
-					</article>
-				);
-			})}
-		</Layout>
+					return (
+						<article key={idx}>
+							<h3>
+								{tit.length > 50
+									? tit.substr(0, 30) + '...'
+									: tit}
+							</h3>
+							<div className='txt'>
+								<p>
+									{desc.length > 200
+										? desc.substr(0, 200) + '...'
+										: desc}
+								</p>
+								<span>{date.split('T')[0]}</span>
+							</div>
+							<div className='pic'>
+								<img
+									src={vid.snippet.thumbnails.standard.url}
+									alt={vid.title}
+								/>
+							</div>
+						</article>
+					);
+				})}
+			</Layout>
+			<Popup />
+		</>
 	);
 }
 
