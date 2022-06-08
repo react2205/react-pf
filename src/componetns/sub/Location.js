@@ -78,10 +78,21 @@ function Location() {
 			container.current,
 			option
 		);
+
+		const handleResize = () => {
+			console.log('브라우저 리사이즈 마커 가운데 고정');
+			map_instance.setCenter(Info[Index].latlng);
+		};
 		//마커 출력
 		marker.setMap(map_instance);
 		//인스턴스값을 state에 담아서 관리
 		setLocation(map_instance);
+
+		//브라우저 리사이즈시 마커 중앙 유지
+		window.addEventListener('resize', handleResize);
+
+		return () =>
+			window.removeEventListener('resize', handleResize);
 
 		//버튼 활성화
 		/*
