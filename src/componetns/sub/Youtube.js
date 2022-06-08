@@ -8,7 +8,12 @@ function Youtube() {
 	const [Open, setOpen] = useState(false);
 	const [Index, setIndex] = useState(0);
 
-	useEffect(() => {
+	const handlePopup = (index) => {
+		setOpen(true);
+		setIndex(index);
+	};
+
+	const fetchYoutube = () => {
 		const key = 'AIzaSyC77Pd__ju0Wqx_Umc-IuW7Cn2mWi_HVsk';
 		const playlist = 'PLHtvRFLN5v-W-izd7V4JH2L4-RTW0WRi3';
 		const num = 8;
@@ -18,7 +23,9 @@ function Youtube() {
 			console.log(json);
 			setVids(json.data.items);
 		});
-	}, []);
+	};
+
+	useEffect(fetchYoutube, []);
 
 	return (
 		<>
@@ -45,10 +52,7 @@ function Youtube() {
 							</div>
 							<div
 								className='pic'
-								onClick={() => {
-									setOpen(true);
-									setIndex(idx);
-								}}>
+								onClick={() => handlePopup(idx)}>
 								<img
 									src={vid.snippet.thumbnails.standard.url}
 									alt={vid.title}
