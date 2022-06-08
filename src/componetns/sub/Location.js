@@ -1,9 +1,10 @@
 import Layout from '../common/Layout';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function Location() {
 	//윈도우 전역객체에 있는 kakao키값을 바로 변수로 비구조화 할당
 	const { kakao } = window;
+	const [Location, setLocation] = useState(null);
 	const container = useRef(null);
 	const option = {
 		center: new kakao.maps.LatLng(
@@ -46,11 +47,29 @@ function Location() {
 		);
 		//마커 출력
 		marker.setMap(map_instance);
+		//인스턴스값을 state에 담아서 관리
+		setLocation(map_instance);
 	}, []);
 
 	return (
 		<Layout name={'Location'}>
 			<div id='map' ref={container}></div>
+			<button
+				onClick={() =>
+					Location.addOverlayMapTypeId(
+						kakao.maps.MapTypeId.TRAFFIC
+					)
+				}>
+				Traffic ON
+			</button>
+			<button
+				onClick={() =>
+					Location.removeOverlayMapTypeId(
+						kakao.maps.MapTypeId.TRAFFIC
+					)
+				}>
+				Traffic OFF
+			</button>
 		</Layout>
 	);
 }
