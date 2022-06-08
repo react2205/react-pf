@@ -4,21 +4,52 @@ import { useEffect, useRef, useState } from 'react';
 function Location() {
 	//윈도우 전역객체에 있는 kakao키값을 바로 변수로 비구조화 할당
 	const { kakao } = window;
+	const info = [
+		{
+			title: '삼성동 코엑스',
+			latlng: new kakao.maps.LatLng(
+				37.51270773913474,
+				127.06069417509839
+			),
+			imgSrc: `${process.env.PUBLIC_URL}/img/marker1.png`,
+			imgSize: new kakao.maps.Size(232, 99),
+			imgPos: {
+				offset: new kakao.maps.Point(116, 99),
+			},
+		},
+		{
+			title: '올림픽 공원',
+			latlng: new kakao.maps.LatLng(
+				37.5188715541183,
+				127.12528957675329
+			),
+			imgSrc: `${process.env.PUBLIC_URL}/img/marker2.png`,
+			imgSize: new kakao.maps.Size(232, 99),
+			imgPos: {
+				offset: new kakao.maps.Point(116, 99),
+			},
+		},
+		{
+			title: '서울 시청',
+			latlng: new kakao.maps.LatLng(37.566826, 126.9786567),
+			imgSrc: `${process.env.PUBLIC_URL}/img/marker3.png`,
+			imgSize: new kakao.maps.Size(232, 99),
+			imgPos: {
+				offset: new kakao.maps.Point(116, 99),
+			},
+		},
+	];
 	const [Location, setLocation] = useState(null);
 	const [Traffic, setTraffic] = useState(false);
+	const [Info, setInfo] = useState(info);
 	const container = useRef(null);
 	const option = {
-		center: new kakao.maps.LatLng(
-			37.51270773913474,
-			127.06069417509839
-		),
+		center: Info[2].latlng,
 		level: 3,
 	};
-	const imageSrc = `${process.env.PUBLIC_URL}/img/marker1.png`;
-	const imageSize = new kakao.maps.Size(232, 99);
-	const imageOption = {
-		offset: new kakao.maps.Point(116, 99),
-	};
+	const imageSrc = Info[2].imgSrc;
+	const imageSize = Info[2].imgSize;
+	const imageOption = Info[2].imgPos;
 
 	//마커이미지 인스턴스 생성
 	const markerImage = new kakao.maps.MarkerImage(
@@ -28,10 +59,7 @@ function Location() {
 	);
 
 	//위치 인스턴스 생성
-	const markerPosition = new kakao.maps.LatLng(
-		37.51270773913474,
-		127.06069417509839
-	);
+	const markerPosition = Info[2].latlng;
 
 	//위치 인스턴스 값을 인수로 해서 마커 인스턴스 생성
 	const marker = new kakao.maps.Marker({
