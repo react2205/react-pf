@@ -5,6 +5,7 @@ function Location() {
 	//윈도우 전역객체에 있는 kakao키값을 바로 변수로 비구조화 할당
 	const { kakao } = window;
 	const [Location, setLocation] = useState(null);
+	const [Traffic, setTraffic] = useState(false);
 	const container = useRef(null);
 	const option = {
 		center: new kakao.maps.LatLng(
@@ -51,24 +52,23 @@ function Location() {
 		setLocation(map_instance);
 	}, []);
 
+	useEffect(() => {
+		if (Location) {
+			Traffic
+				? Location.addOverlayMapTypeId(
+						kakao.maps.MapTypeId.TRAFFIC
+				  )
+				: Location.removeOverlayMapTypeId(
+						kakao.maps.MapTypeId.TRAFFIC
+				  );
+		}
+	}, [Traffic]);
+
 	return (
 		<Layout name={'Location'}>
 			<div id='map' ref={container}></div>
-			<button
-				onClick={() =>
-					Location.addOverlayMapTypeId(
-						kakao.maps.MapTypeId.TRAFFIC
-					)
-				}>
-				Traffic ON
-			</button>
-			<button
-				onClick={() =>
-					Location.removeOverlayMapTypeId(
-						kakao.maps.MapTypeId.TRAFFIC
-					)
-				}>
-				Traffic OFF
+			<button onClick={() => setTraffic(!Traffic)}>
+				{Traffic ? 'Traffic OFF' : 'Traffic ON'}
 			</button>
 		</Layout>
 	);
