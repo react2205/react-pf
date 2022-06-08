@@ -6,19 +6,35 @@ function Location() {
 	const { kakao } = window;
 	const container = useRef(null);
 	const option = {
-		center: new kakao.maps.LatLng(33.450701, 126.570667),
+		center: new kakao.maps.LatLng(
+			37.51270773913474,
+			127.06069417509839
+		),
 		level: 3,
 	};
+	const imageSrc = `${process.env.PUBLIC_URL}/img/marker1.png`;
+	const imageSize = new kakao.maps.Size(232, 99);
+	const imageOption = {
+		offset: new kakao.maps.Point(116, 99),
+	};
+
+	//마커이미지 인스턴스 생성
+	const markerImage = new kakao.maps.MarkerImage(
+		imageSrc,
+		imageSize,
+		imageOption
+	);
 
 	//위치 인스턴스 생성
 	const markerPosition = new kakao.maps.LatLng(
-		33.450701,
-		126.570667
+		37.51270773913474,
+		127.06069417509839
 	);
 
 	//위치 인스턴스 값을 인수로 해서 마커 인스턴스 생성
 	const marker = new kakao.maps.Marker({
 		position: markerPosition,
+		image: markerImage,
 	});
 	//최종 마커 호출
 
