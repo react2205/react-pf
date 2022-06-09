@@ -1,7 +1,9 @@
 import Layout from '../common/Layout';
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Join() {
+	const history = useHistory();
 	const initVal = {
 		userid: '',
 		pwd1: '',
@@ -15,6 +17,7 @@ function Join() {
 	const [Val, setVal] = useState(initVal);
 	const [Err, setErr] = useState({});
 	const [Success, setSuccess] = useState(false);
+	const [Submit, setSubmit] = useState(false);
 
 	const check = (Val) => {
 		const errs = {};
@@ -98,9 +101,10 @@ function Join() {
 		console.log(Err);
 		console.log(Object.keys(Err).length);
 		const len = Object.keys(Err).length;
-		if (len === 0) {
+		if (len === 0 && Submit) {
 			setSuccess(true);
 			console.log('회원가입 성공');
+			history.push('/');
 		} else {
 			setSuccess(false);
 			console.log('회원가입 실패');
@@ -296,7 +300,11 @@ function Join() {
 							<tr>
 								<th colSpan='2'>
 									<input type='reset' value='CANCEL' />
-									<input type='submit' value='SUBMIT' />
+									<input
+										type='submit'
+										value='SUBMIT'
+										onClick={() => setSubmit(true)}
+									/>
 								</th>
 							</tr>
 						</tbody>
