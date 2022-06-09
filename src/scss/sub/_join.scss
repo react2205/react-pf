@@ -59,3 +59,57 @@
 		}
 	}
 }
+
+@media screen and (max-width: $tablet) {
+	.Join {
+		> .inner {
+			table {
+				td {
+					input[type='text'],
+					input[type='password'],
+					select,
+					textarea {
+						width: 80%;
+					}
+					label {
+						margin-right: 6px;
+					}
+					input[type='radio'],
+					input[type='checkbox'] {
+						margin-right: 20px;
+					}
+
+					.err {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $mp) {
+	.Join {
+		> .inner {
+			table {
+				th {
+					display: none;
+
+					&:last-child {
+						display: block;
+					}
+				}
+				td {
+					border-left: none;
+
+					input[type='text'],
+					input[type='password'],
+					select,
+					textarea {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+}
