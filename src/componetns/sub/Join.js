@@ -78,6 +78,7 @@ function Join() {
 										value={Val.userid}
 										onChange={handleChange}
 									/>
+									<span className='err'>{Err.userid}</span>
 								</td>
 							</tr>
 
@@ -95,6 +96,7 @@ function Join() {
 										value={Val.pwd1}
 										onChange={handleChange}
 									/>
+									<span className='err'>{Err.pwd1}</span>
 								</td>
 							</tr>
 							<tr>
@@ -110,6 +112,7 @@ function Join() {
 										value={Val.pwd2}
 										onChange={handleChange}
 									/>
+									<span className='err'>{Err.pwd2}</span>
 								</td>
 							</tr>
 
@@ -127,6 +130,7 @@ function Join() {
 										value={Val.email}
 										onChange={handleChange}
 									/>
+									<span className='err'>{Err.email}</span>
 								</td>
 							</tr>
 
