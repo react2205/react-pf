@@ -61,6 +61,12 @@ function Join() {
 		return errs;
 	};
 
+	const handleReset = () => {
+		setSubmit(false);
+		setErr({});
+		setVal(initVal);
+	};
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setVal({ ...Val, [name]: value });
@@ -98,16 +104,12 @@ function Join() {
 	};
 
 	useEffect(() => {
-		console.log(Err);
-		console.log(Object.keys(Err).length);
 		const len = Object.keys(Err).length;
 		if (len === 0 && Submit) {
 			setSuccess(true);
-			console.log('회원가입 성공');
 			history.push('/');
 		} else {
 			setSuccess(false);
-			console.log('회원가입 실패');
 		}
 	}, [Err]);
 
@@ -299,7 +301,11 @@ function Join() {
 							{/* btnSet */}
 							<tr>
 								<th colSpan='2'>
-									<input type='reset' value='CANCEL' />
+									<input
+										type='reset'
+										value='CANCEL'
+										onClick={handleReset}
+									/>
 									<input
 										type='submit'
 										value='SUBMIT'
