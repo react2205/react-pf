@@ -7,6 +7,7 @@ function Join() {
 		pwd1: '',
 		pwd2: '',
 		email: '',
+		comments: '',
 		gender: null,
 		interests: null,
 	};
@@ -45,6 +46,9 @@ function Join() {
 		}
 		if (!Val.interests) {
 			errs.interests = '관심사를 하나이상 선택하세요';
+		}
+		if (Val.comments.length < 20) {
+			errs.comments = '남기는 말은 20글자 이상 입력하세요';
 		}
 		return errs;
 	};
@@ -214,6 +218,25 @@ function Join() {
 									/>
 									<span className='err'>
 										{Err.interests}
+									</span>
+								</td>
+							</tr>
+
+							{/* comments */}
+							<tr>
+								<th scope='row'>
+									<label htmlFor='comments'>COMMENTS</label>
+								</th>
+								<td>
+									<textarea
+										name='comments'
+										id='comments'
+										cols='30'
+										rows='10'
+										value={Val.comments}
+										onChange={handleChange}></textarea>
+									<span className='err'>
+										{Err.comments}
 									</span>
 								</td>
 							</tr>
