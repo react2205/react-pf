@@ -14,6 +14,7 @@ function Join() {
 	};
 	const [Val, setVal] = useState(initVal);
 	const [Err, setErr] = useState({});
+	const [Success, setSuccess] = useState(false);
 
 	const check = (Val) => {
 		const errs = {};
@@ -95,6 +96,15 @@ function Join() {
 
 	useEffect(() => {
 		console.log(Err);
+		console.log(Object.keys(Err).length);
+		const len = Object.keys(Err).length;
+		if (len === 0) {
+			setSuccess(true);
+			console.log('회원가입 성공');
+		} else {
+			setSuccess(false);
+			console.log('회원가입 실패');
+		}
 	}, [Err]);
 
 	return (
