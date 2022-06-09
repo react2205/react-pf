@@ -8,6 +8,7 @@ function Join() {
 		pwd2: '',
 		email: '',
 		comments: '',
+		edu: '',
 		gender: null,
 		interests: null,
 	};
@@ -50,6 +51,9 @@ function Join() {
 		if (Val.comments.length < 20) {
 			errs.comments = '남기는 말은 20글자 이상 입력하세요';
 		}
+		if (Val.edu === '') {
+			errs.edu = '최종 학력을 선택하세요';
+		}
 		return errs;
 	};
 
@@ -75,6 +79,13 @@ function Join() {
 		});
 
 		setVal({ ...Val, [name]: isCheck });
+	};
+
+	const handleSelect = (e) => {
+		const { name } = e.target;
+		const isSelected =
+			e.target.options[e.target.selectedIndex].value;
+		setVal({ ...Val, [name]: isSelected });
 	};
 
 	const handleSubmit = (e) => {
@@ -219,6 +230,36 @@ function Join() {
 									<span className='err'>
 										{Err.interests}
 									</span>
+								</td>
+							</tr>
+
+							{/* edu */}
+							<tr>
+								<th scope='row'>
+									<label htmlFor='edu'>EDUCATION</label>
+								</th>
+								<td>
+									<select
+										name='edu'
+										id='edu'
+										onChange={handleSelect}>
+										<option value=''>
+											학력을 선택하세요
+										</option>
+										<option value='elementary-school'>
+											초등학교 졸업
+										</option>
+										<option value='middle-school'>
+											중학교 졸업
+										</option>
+										<option value='high-school'>
+											고등학교 졸업
+										</option>
+										<option value='college'>
+											대학교 졸업
+										</option>
+									</select>
+									<span className='err'>{Err.edu}</span>
 								</td>
 							</tr>
 
