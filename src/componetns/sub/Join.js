@@ -7,6 +7,7 @@ function Join() {
 		pwd1: '',
 		pwd2: '',
 		email: '',
+		gender: null,
 	};
 	const [Val, setVal] = useState(initVal);
 	const [Err, setErr] = useState({});
@@ -35,9 +36,11 @@ function Join() {
 			errs.pwd2 = '두개의 비밀번호를 동일하게 입력하세요';
 		}
 		if (Val.email.length < 8 || !/@/.test(Val.email)) {
-			//email인증처리
 			errs.email =
 				'이메일은 8글자이상 @를 포함해 입력하세요';
+		}
+		if (!Val.gender) {
+			errs.gender = '성별을 선택하세요';
 		}
 		return errs;
 	};
@@ -45,6 +48,12 @@ function Join() {
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setVal({ ...Val, [name]: value });
+	};
+
+	const handleRadio = (e) => {
+		const { name } = e.target;
+		const isCheck = e.target.checked;
+		setVal({ ...Val, [name]: isCheck });
 	};
 
 	const handleSubmit = (e) => {
@@ -61,7 +70,7 @@ function Join() {
 			<form onSubmit={handleSubmit}>
 				<fieldset>
 					<legend className='h'>회원가입 폼 양식</legend>
-					<table border='1'>
+					<table>
 						<caption className='h'>
 							회원가입 정보입력
 						</caption>
@@ -133,6 +142,29 @@ function Join() {
 										onChange={handleChange}
 									/>
 									<span className='err'>{Err.email}</span>
+								</td>
+							</tr>
+
+							{/* gender */}
+							<tr>
+								<th scope='row'>GENDER</th>
+								<td>
+									<label htmlFor='male'>Male</label>
+									<input
+										type='radio'
+										id='male'
+										name='gender'
+										onChange={handleRadio}
+									/>
+
+									<label htmlFor='female'>Female</label>
+									<input
+										type='radio'
+										id='female'
+										name='gender'
+										onChange={handleRadio}
+									/>
+									<span className='err'>{Err.gender}</span>
 								</td>
 							</tr>
 
