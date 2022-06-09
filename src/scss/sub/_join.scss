@@ -1,0 +1,53 @@
+.Join {
+	> .inner {
+		table {
+			border: none;
+			border-top: 2px solid #333;
+			border-bottom: 1px solide #333;
+			width: 100%;
+
+			th {
+				width: 20%;
+				border: none;
+				border-bottom: 1px solid #bbb;
+				padding: 15px 30px;
+				text-align: left;
+
+				&:last-child {
+					text-align: center;
+				}
+				input[type='reset'],
+				input[type='submit'] {
+					border: 1px solid #aaa;
+					width: 150px;
+					height: 30px;
+					display: inline-flex;
+					justify-content: center;
+					align-items: center;
+					margin: 0px 10px;
+					cursor: pointer;
+				}
+			}
+			td {
+				border: none;
+				border-bottom: 1px solid #bbb;
+				border-left: 1px solid #bbb;
+				padding: 15px 30px;
+
+				input[type='text'],
+				input[type='password'],
+				textarea {
+					width: 40%;
+					border: 1px solid #aaa;
+					padding: 6px 10px;
+				}
+
+				.err {
+					font-size: $fontS;
+					color: hotpink;
+					margin-left: 10px;
+				}
+			}
+		}
+	}
+}

@@ -60,9 +60,11 @@ function Join() {
 		<Layout name={'Join'}>
 			<form onSubmit={handleSubmit}>
 				<fieldset>
-					<legend>회원가입 폼 양식</legend>
+					<legend className='h'>회원가입 폼 양식</legend>
 					<table border='1'>
-						<caption>회원가입 정보입력</caption>
+						<caption className='h'>
+							회원가입 정보입력
+						</caption>
 						<tbody>
 							{/* userid */}
 							<tr>
