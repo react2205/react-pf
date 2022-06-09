@@ -96,7 +96,15 @@
 					display: none;
 
 					&:last-child {
-						display: block;
+						display: flex;
+						width: 100%;
+						justify-content: space-between;
+
+						input[type='reset'],
+						input[type='submit'] {
+							width: 45%;
+							margin: 0;
+						}
 					}
 				}
 				td {
