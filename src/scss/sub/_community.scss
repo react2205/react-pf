@@ -12,6 +12,7 @@
 				padding: 8px 10px;
 				border: 1px solid #aaa;
 				margin-bottom: 20px;
+				resize: none;
 			}
 
 			.btnSet {
@@ -58,6 +59,18 @@
 						font-size: $fontS;
 						margin-left: 10px;
 						cursor: pointer;
+					}
+				}
+
+				.editTxt {
+					width: 60%;
+					input[type='text'],
+					textarea {
+						width: 100%;
+						padding: 4px 8px;
+						border: 1px solid #aaa;
+						margin-bottom: 10px;
+						resize: none;
 					}
 				}
 			}
