@@ -20,8 +20,10 @@ function Community() {
 	const resetPost = () => {
 		input.current.value = '';
 		textarea.current.value = '';
-		inputEdit.current.value = '';
-		textareaEdit.current.value = '';
+		if (inputEdit.current) {
+			inputEdit.current.value = '';
+			textareaEdit.current.value = '';
+		}
 	};
 
 	//글 저장 함수
