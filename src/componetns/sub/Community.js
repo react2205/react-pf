@@ -14,6 +14,7 @@ function Community() {
 		{ title: 'Hello1', content: 'Here comes description in detail.' },
 	];
 	const [Posts, setPosts] = useState(dummyPosts);
+	const [Allowed, setAllowed] = useState(true);
 
 	//글 초기화  함수
 	const resetPost = () => {
@@ -63,6 +64,8 @@ function Community() {
 
 	//글 수정모드 변경함수
 	const enableUpdate = (index) => {
+		if (!Allowed) return;
+		setAllowed(false);
 		setPosts(
 			Posts.map((post, idx) => {
 				if (idx === index) post.enableUpdate = true;
@@ -73,6 +76,7 @@ function Community() {
 
 	//출력모드 변경함수
 	const disableUpdate = (index) => {
+		setAllowed(true);
 		setPosts(
 			Posts.map((post, idx) => {
 				if (idx === index) post.enableUpdate = false;
