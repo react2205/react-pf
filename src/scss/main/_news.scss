@@ -3,7 +3,27 @@
 	height: 100vh;
 	background: lightcyan;
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
-	align-items: center;
+	align-content: center;
 	font-size: 10vw;
+	padding: 5vw;
+
+	article {
+		width: 15%;
+		min-height: 180px;
+		border: 1px solid #888;
+		padding: 20px;
+		margin: 10px;
+
+		h2 {
+			font-size: $fontL;
+			color: #444;
+			margin-bottom: 20px;
+		}
+		p {
+			font-size: $fontM;
+			color: #777;
+		}
+	}
 }
