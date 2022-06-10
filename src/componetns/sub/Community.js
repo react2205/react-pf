@@ -6,17 +6,22 @@ function Community() {
 	const textarea = useRef(null);
 	const [Posts, setPosts] = useState([]);
 
+	//글 초기화  함수
 	const resetPost = () => {
 		input.current.value = '';
 		textarea.current.value = '';
 	};
 
+	//글 저장 함수
 	const createPost = () => {
+		if (!input.current.value.trim() || !textarea.current.value.trim()) {
+			resetPost();
+			return alert('제목과 본문을 모두 입력하세요');
+		}
 		setPosts([
-			...Posts,
 			{ title: input.current.value, content: textarea.current.value },
+			...Posts,
 		]);
-
 		resetPost();
 	};
 
