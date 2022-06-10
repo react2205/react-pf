@@ -15,7 +15,7 @@
 		transform: translateY(100px);
 		transition: opacity 1s, transform 1s;
 
-		h2 {
+		> h1 {
 			font-weight: normal;
 			font-size: $fontXXXL;
 			font-family: 'work sans';
@@ -45,7 +45,7 @@
 			transform: translateY(0px);
 			opacity: 1;
 
-			h2 {
+			h1 {
 				transform: translateX(0px);
 				opacity: 1;
 			}
