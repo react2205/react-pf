@@ -24,11 +24,12 @@ function Main() {
 	};
 
 	const activation = () => {
+		const base = -300;
 		const scroll = window.scrollY;
 		const btns = main.current.querySelectorAll('.scroll_navi li');
 
 		pos.current.map((pos, idx) => {
-			if (scroll >= pos) {
+			if (scroll >= pos + base) {
 				for (const btn of btns) btn.classList.remove('on');
 				btns[idx].classList.add('on');
 			}
