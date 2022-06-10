@@ -4,7 +4,14 @@ import { useRef, useState, useEffect } from 'react';
 function Community() {
 	const input = useRef(null);
 	const textarea = useRef(null);
-	const [Posts, setPosts] = useState([]);
+	const dummyPosts = [
+		{ title: 'Hello5', content: 'Here comes description in detail.' },
+		{ title: 'Hello4', content: 'Here comes description in detail.' },
+		{ title: 'Hello3', content: 'Here comes description in detail.' },
+		{ title: 'Hello2', content: 'Here comes description in detail.' },
+		{ title: 'Hello1', content: 'Here comes description in detail.' },
+	];
+	const [Posts, setPosts] = useState(dummyPosts);
 
 	//글 초기화  함수
 	const resetPost = () => {
