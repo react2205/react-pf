@@ -4,6 +4,8 @@ import { useRef, useState, useEffect } from 'react';
 function Community() {
 	const input = useRef(null);
 	const textarea = useRef(null);
+	const inputEdit = useRef(null);
+	const textareaEdit = useRef(null);
 	const dummyPosts = [
 		{ title: 'Hello5', content: 'Here comes description in detail.' },
 		{ title: 'Hello4', content: 'Here comes description in detail.' },
@@ -17,6 +19,8 @@ function Community() {
 	const resetPost = () => {
 		input.current.value = '';
 		textarea.current.value = '';
+		inputEdit.current.value = '';
+		textareaEdit.current.value = '';
 	};
 
 	//글 저장 함수
@@ -38,11 +42,40 @@ function Community() {
 		setPosts(Posts.filter((_, idx) => index !== idx));
 	};
 
+	//실제 글 수정 함수
+	const updatePost = (index) => {
+		if (!inputEdit.current.value.trim() || !textareaEdit.current.value.trim()) {
+			resetPost();
+			return alert('수정할 제목과 본문을 모두 입력하세요');
+		}
+
+		setPosts(
+			Posts.map((post, idx) => {
+				if (idx === index) {
+					post.title = inputEdit.current.value;
+					post.content = textareaEdit.current.value;
+					post.enableUpdate = false;
+				}
+				return post;
+			})
+		);
+	};
+
 	//글 수정모드 변경함수
 	const enableUpdate = (index) => {
 		setPosts(
 			Posts.map((post, idx) => {
 				if (idx === index) post.enableUpdate = true;
+				return post;
+			})
+		);
+	};
+
+	//출력모드 변경함수
+	const disableUpdate = (index) => {
+		setPosts(
+			Posts.map((post, idx) => {
+				if (idx === index) post.enableUpdate = false;
 				return post;
 			})
 		);
@@ -78,17 +111,22 @@ function Community() {
 								//수정모드
 								<>
 									<div className='editTxt'>
-										<input type='text' defaultValue={post.title} />
+										<input
+											type='text'
+											defaultValue={post.title}
+											ref={inputEdit}
+										/>
 										<br />
 										<textarea
 											cols='30'
 											rows='5'
+											ref={textareaEdit}
 											defaultValue={post.content}></textarea>
 									</div>
 
 									<div className='btnSet'>
-										<button>CANCEL</button>
-										<button>SAVE</button>
+										<button onClick={() => disableUpdate(idx)}>CANCEL</button>
+										<button onClick={() => updatePost(idx)}>SAVE</button>
 									</div>
 								</>
 							) : (
