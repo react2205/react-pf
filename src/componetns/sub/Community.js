@@ -38,6 +38,16 @@ function Community() {
 		setPosts(Posts.filter((_, idx) => index !== idx));
 	};
 
+	//글 수정모드 변경함수
+	const enableUpdate = (index) => {
+		setPosts(
+			Posts.map((post, idx) => {
+				if (idx === index) post.enableUpdate = true;
+				return post;
+			})
+		);
+	};
+
 	useEffect(() => {
 		console.log(Posts);
 	}, [Posts]);
@@ -64,11 +74,13 @@ function Community() {
 				{Posts.map((post, idx) => {
 					return (
 						<article key={idx}>
-							<h2>{post.title}</h2>
-							<p>{post.content}</p>
+							<div className='txt'>
+								<h2>{post.title}</h2>
+								<p>{post.content}</p>
+							</div>
 
 							<div className='btnSet'>
-								<button>EDIT</button>
+								<button onClick={() => enableUpdate(idx)}>EDIT</button>
 								<button onClick={() => deletePost(idx)}>DELETE</button>
 							</div>
 						</article>

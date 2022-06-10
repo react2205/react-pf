@@ -39,6 +39,27 @@
 				background: #fff;
 				padding: 30px;
 				margin-bottom: 40px;
+				display: flex;
+				justify-content: space-between;
+				align-content: center;
+				flex-wrap: wrap;
+
+				.btnSet {
+					display: flex;
+					align-items: center;
+
+					button {
+						width: 60px;
+						height: 26px;
+						border: 1px solid #bbb;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						font-size: $fontS;
+						margin-left: 10px;
+						cursor: pointer;
+					}
+				}
 			}
 		}
 	}
