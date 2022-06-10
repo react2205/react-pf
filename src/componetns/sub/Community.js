@@ -87,8 +87,8 @@ function Community() {
 									</div>
 
 									<div className='btnSet'>
-										<button onClick={() => enableUpdate(idx)}>EDIT</button>
-										<button onClick={() => deletePost(idx)}>DELETE</button>
+										<button>CANCEL</button>
+										<button>SAVE</button>
 									</div>
 								</>
 							) : (
