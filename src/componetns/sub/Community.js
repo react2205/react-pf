@@ -112,7 +112,7 @@ function Community() {
 				<br />
 				<textarea
 					cols='30'
-					rows='10'
+					rows='5'
 					placeholder='본문을 입력하세요'
 					ref={textarea}></textarea>
 				<br />

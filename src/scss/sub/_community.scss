@@ -77,3 +77,59 @@
 		}
 	}
 }
+
+@media screen and (max-width: $tablet) {
+	.Community {
+		> .inner {
+			.inputBox {
+				input[type='text'],
+				textarea {
+					width: 100%;
+				}
+
+				.btnSet {
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: space-between;
+
+					button {
+						width: 47%;
+						margin-right: 0px;
+					}
+				}
+			}
+
+			.showBox {
+				article {
+					background: #fff;
+					padding: 30px;
+					margin-bottom: 40px;
+					display: flex;
+					justify-content: space-between;
+					align-content: center;
+					flex-wrap: wrap;
+
+					.txt {
+						width: 100%;
+						margin-bottom: 30px;
+					}
+
+					.btnSet {
+						width: 100%;
+						display: flex;
+						justify-content: space-between;
+
+						button {
+							margin-left: 0px;
+							width: 48%;
+						}
+					}
+
+					.editTxt {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+}
