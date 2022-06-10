@@ -32,6 +32,12 @@ function Community() {
 		resetPost();
 	};
 
+	//글 삭제 함수
+	const deletePost = (index) => {
+		console.log(index);
+		setPosts(Posts.filter((_, idx) => index !== idx));
+	};
+
 	useEffect(() => {
 		console.log(Posts);
 	}, [Posts]);
@@ -58,6 +64,11 @@ function Community() {
 						<article key={idx}>
 							<h2>{post.title}</h2>
 							<p>{post.content}</p>
+
+							<div className='btnSet'>
+								<button>EDIT</button>
+								<button onClick={() => deletePost(idx)}>DELETE</button>
+							</div>
 						</article>
 					);
 				})}
