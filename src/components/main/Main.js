@@ -4,8 +4,9 @@ import News from './News';
 import Pics from './Pics';
 import Vids from './Vids';
 import Btns from './Btns';
+import Anime from '../../asset/anim.js';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 function Main() {
 	const main = useRef(null);
@@ -15,11 +16,12 @@ function Main() {
 	//useRef에 담겨있는 값이 변경되더라도 컴포넌트가 재실행되지 않음
 	const pos = useRef([]);
 
+	const [Index, setIndex] = useState(0);
+
 	const getPos = () => {
 		pos.current = [];
 		const secs = main.current.querySelectorAll('.myScroll');
 		for (const sec of secs) pos.current.push(sec.offsetTop);
-		console.log(pos.current);
 	};
 
 	useEffect(() => {
@@ -29,6 +31,14 @@ function Main() {
 		return () => window.removeEventListener('resize', getPos);
 	}, []);
 
+	useEffect(() => {
+		new Anime(window, {
+			prop: 'scroll',
+			value: pos.current[Index],
+			duration: 500,
+		});
+	}, [Index]);
+
 	return (
 		<>
 			<main ref={main}>
@@ -37,7 +47,7 @@ function Main() {
 				<News />
 				<Pics />
 				<Vids />
-				<Btns />
+				<Btns setIndex={setIndex} />
 			</main>
 		</>
 	);
