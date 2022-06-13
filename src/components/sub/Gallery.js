@@ -10,14 +10,19 @@ function Gallery() {
 	const [EnableClick, setEnableClick] = useState(true);
 	const masonryOptions = { transitionDuration: '0.5s' };
 
-	const key = '4612601b324a2fe5a1f5f7402bf8d87a';
-	const method_interest = 'flickr.interestingness.getList';
-	const method_search = 'flickr.photos.search';
-	const num = 500;
-	const interest_url = `https://www.flickr.com/services/rest/?method=${method_interest}&api_key=${key}&per_page=${num}&nojsoncallback=1&format=json`;
-	const search_url = `https://www.flickr.com/services/rest/?method=${method_search}&api_key=${key}&per_page=${num}&nojsoncallback=1&format=json&tags=ocean`;
+	const getFlickr = async (opt) => {
+		const key = '4612601b324a2fe5a1f5f7402bf8d87a';
+		const method_interest = 'flickr.interestingness.getList';
+		const method_search = 'flickr.photos.search';
+		let url = '';
 
-	const getFlickr = async (url) => {
+		if (opt.type === 'interest') {
+			url = `https://www.flickr.com/services/rest/?method=${method_interest}&api_key=${key}&per_page=${opt.count}&nojsoncallback=1&format=json`;
+		}
+		if (opt.type === 'search') {
+			url = `https://www.flickr.com/services/rest/?method=${method_search}&api_key=${key}&per_page=${opt.count}&nojsoncallback=1&format=json&tags=${opt.tags}`;
+		}
+
 		await axios.get(url).then((json) => {
 			setItems(json.data.photos.photo);
 		});
@@ -33,7 +38,10 @@ function Gallery() {
 	};
 
 	useEffect(() => {
-		getFlickr(interest_url);
+		getFlickr({
+			type: 'interest',
+			count: 500,
+		});
 	}, []);
 
 	return (
@@ -50,7 +58,10 @@ function Gallery() {
 						setEnableClick(false);
 						setLoading(true);
 						frame.current.classList.remove('on');
-						getFlickr(interest_url);
+						getFlickr({
+							type: 'interest',
+							count: 500,
+						});
 					}
 				}}>
 				Interest Gallery
@@ -61,7 +72,11 @@ function Gallery() {
 						setEnableClick(false);
 						setLoading(true);
 						frame.current.classList.remove('on');
-						getFlickr(search_url);
+						getFlickr({
+							type: 'search',
+							count: 500,
+							tags: 'srping',
+						});
 					}
 				}}>
 				Search Gallery
