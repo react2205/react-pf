@@ -15,6 +15,8 @@ function Main() {
 	//useRef에 담겨있는 값이 변경되더라도 컴포넌트가 재실행되지 않음
 	const pos = useRef([]);
 	const [Index, setIndex] = useState(0);
+	//현재 스크롤되는 값을 관리할 state추가
+	const [Scrolled, setScrolled] = useState(0);
 	let secs = null;
 
 	const getPos = () => {
@@ -27,6 +29,8 @@ function Main() {
 		const base = -200;
 		const scroll = window.scrollY;
 		const btns = main.current.querySelectorAll('.scroll_navi li');
+		//현재 스크롤되는 거리값을 scrolled state에 저장해서 관리
+		setScrolled(scroll);
 
 		pos.current.map((pos, idx) => {
 			if (scroll >= pos + base) {
@@ -63,7 +67,7 @@ function Main() {
 				<Header type={'main'} />
 				<Visual />
 				<News />
-				<Pics />
+				<Pics Scrolled={Scrolled} />
 				<Vids />
 				<Btns setIndex={setIndex} />
 			</main>

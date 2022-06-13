@@ -1,6 +1,5 @@
-import React from 'react';
-
-function Pics() {
+function Pics({ Scrolled }) {
+	console.log(Scrolled);
 	return (
 		<section id='pic' className='myScroll'>
 			Pics
