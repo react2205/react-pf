@@ -1,10 +1,12 @@
 import Layout from '../common/Layout';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
+import Masonry from 'react-masonry-component';
 
 function Gallery() {
 	const frame = useRef(null);
 	const [Items, setItems] = useState([]);
+	const masonryOptions = { transitionDuration: '0.5s' };
 
 	const key = '4612601b324a2fe5a1f5f7402bf8d87a';
 	const method_interest = 'flickr.interestingness.getList';
@@ -43,21 +45,23 @@ function Gallery() {
 			</button>
 
 			<div className='frame' ref={frame}>
-				{Items.map((item, idx) => {
-					return (
-						<article key={idx}>
-							<div className='inner'>
-								<div className='pic'>
-									<img
-										src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`}
-										alt=''
-									/>
+				<Masonry elementType={'div'} options={masonryOptions}>
+					{Items.map((item, idx) => {
+						return (
+							<article key={idx}>
+								<div className='inner'>
+									<div className='pic'>
+										<img
+											src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`}
+											alt=''
+										/>
+									</div>
+									<h2>{item.title}</h2>
 								</div>
-								<h2>{item.title}</h2>
-							</div>
-						</article>
-					);
-				})}
+							</article>
+						);
+					})}
+				</Masonry>
 			</div>
 		</Layout>
 	);
