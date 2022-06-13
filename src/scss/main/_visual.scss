@@ -2,10 +2,21 @@
 	width: 100%;
 	height: 100vh;
 	background: #000;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 10vw;
-	color: #fff;
+	overflow: hidden;
 	position: relative;
+	padding: 200px 0px 100px;
+
+	.swiper {
+		height: 100%;
+
+		.swiper-slide {
+			width: 100%;
+			background: aqua;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font: bold 50px/1 'arial';
+			color: #fff;
+		}
+	}
 }
