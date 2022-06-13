@@ -15,6 +15,7 @@ function Gallery() {
 		const key = '4612601b324a2fe5a1f5f7402bf8d87a';
 		const method_interest = 'flickr.interestingness.getList';
 		const method_search = 'flickr.photos.search';
+		const method_user = 'flickr.people.getPhotos';
 		let url = '';
 
 		if (opt.type === 'interest') {
@@ -23,12 +24,16 @@ function Gallery() {
 		if (opt.type === 'search') {
 			url = `https://www.flickr.com/services/rest/?method=${method_search}&api_key=${key}&per_page=${opt.count}&nojsoncallback=1&format=json&tags=${opt.tags}`;
 		}
+		if (opt.type === 'user') {
+			url = `https://www.flickr.com/services/rest/?method=${method_user}&api_key=${key}&per_page=${opt.count}&nojsoncallback=1&format=json&user_id=${opt.user}`;
+		}
 
 		await axios.get(url).then((json) => {
 			//만약 검색 결과가 없다면 경고창 띄우고 종료
 			if (json.data.photos.photo.length === 0)
 				return alert('해당검색어의 결과이미자 없습니다.');
 			setItems(json.data.photos.photo);
+			console.log(json.data.photos.photo);
 		});
 
 		setTimeout(() => {
@@ -88,7 +93,7 @@ function Gallery() {
 				}}>
 				Interest Gallery
 			</button>
-
+			{/* 미션 - 각 패널에 유저이미지와 아이디 출력하고 클릭시 해당 사용자의 이미지만 다시 출력 */}
 			<div className='searchBox'>
 				<input
 					type='text'
@@ -114,6 +119,35 @@ function Gallery() {
 										/>
 									</div>
 									<h2>{item.title}</h2>
+									<div className='profile'>
+										<img
+											src={`http://farm${item.farm}.staticflickr.com/${item.server}/buddyicons/${item.owner}.jpg`}
+											alt={item.owner}
+											onError={(e) => {
+												//해당 이미지요소의 소스이미지가 없어서 onError이벤트가 발생하면 src값을 대체이미지로 변경
+												e.target.setAttribute(
+													'src',
+													'https://www.flickr.com/images/buddyicon.gif'
+												);
+											}}
+										/>
+										<span
+											onClick={(e) => {
+												if (EnableClick) {
+													setEnableClick(false);
+													setLoading(true);
+													frame.current.classList.remove('on');
+
+													getFlickr({
+														type: 'user',
+														count: 50,
+														user: e.currentTarget.innerText,
+													});
+												}
+											}}>
+											{item.owner}
+										</span>
+									</div>
 								</div>
 							</article>
 						);
