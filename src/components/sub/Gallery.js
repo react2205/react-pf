@@ -7,6 +7,7 @@ function Gallery() {
 	const frame = useRef(null);
 	const [Items, setItems] = useState([]);
 	const [Loading, setLoading] = useState(true);
+	const [EnableClick, setEnableClick] = useState(true);
 	const masonryOptions = { transitionDuration: '0.5s' };
 
 	const key = '4612601b324a2fe5a1f5f7402bf8d87a';
@@ -24,7 +25,11 @@ function Gallery() {
 		setTimeout(() => {
 			frame.current.classList.add('on');
 			setLoading(false);
-		}, 1000);
+
+			setTimeout(() => {
+				setEnableClick(true);
+			}, 2000); //frame요소의 transition시간까지 지연
+		}, 1000); //데이터준비 완료될때까지 지연
 	};
 
 	useEffect(() => {
@@ -41,17 +46,23 @@ function Gallery() {
 			)}
 			<button
 				onClick={() => {
-					setLoading(true);
-					frame.current.classList.remove('on');
-					getFlickr(interest_url);
+					if (EnableClick) {
+						setEnableClick(false);
+						setLoading(true);
+						frame.current.classList.remove('on');
+						getFlickr(interest_url);
+					}
 				}}>
 				Interest Gallery
 			</button>
 			<button
 				onClick={() => {
-					setLoading(true);
-					frame.current.classList.remove('on');
-					getFlickr(search_url);
+					if (EnableClick) {
+						setEnableClick(false);
+						setLoading(true);
+						frame.current.classList.remove('on');
+						getFlickr(search_url);
+					}
 				}}>
 				Search Gallery
 			</button>
