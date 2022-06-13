@@ -5,6 +5,7 @@ import Masonry from 'react-masonry-component';
 
 function Gallery() {
 	const frame = useRef(null);
+	const input = useRef(null);
 	const [Items, setItems] = useState([]);
 	const [Loading, setLoading] = useState(true);
 	const [EnableClick, setEnableClick] = useState(true);
@@ -66,21 +67,28 @@ function Gallery() {
 				}}>
 				Interest Gallery
 			</button>
-			<button
-				onClick={() => {
-					if (EnableClick) {
-						setEnableClick(false);
-						setLoading(true);
-						frame.current.classList.remove('on');
-						getFlickr({
-							type: 'search',
-							count: 500,
-							tags: 'srping',
-						});
-					}
-				}}>
-				Search Gallery
-			</button>
+
+			<div className='searchBox'>
+				<input type='text' ref={input} placeholder='검색어를 입력하세요' />
+				<button
+					onClick={() => {
+						const result = input.current.value;
+						input.current.value = '';
+
+						if (EnableClick) {
+							setEnableClick(false);
+							setLoading(true);
+							frame.current.classList.remove('on');
+							getFlickr({
+								type: 'search',
+								count: 500,
+								tags: result,
+							});
+						}
+					}}>
+					SEARCH
+				</button>
+			</div>
 
 			<div className='frame' ref={frame}>
 				<Masonry elementType={'div'} options={masonryOptions}>
