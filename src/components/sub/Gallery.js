@@ -6,6 +6,7 @@ import Masonry from 'react-masonry-component';
 function Gallery() {
 	const frame = useRef(null);
 	const [Items, setItems] = useState([]);
+	const [Loading, setLoading] = useState(true);
 	const masonryOptions = { transitionDuration: '0.5s' };
 
 	const key = '4612601b324a2fe5a1f5f7402bf8d87a';
@@ -20,7 +21,10 @@ function Gallery() {
 			setItems(json.data.photos.photo);
 		});
 
-		frame.current.classList.add('on');
+		setTimeout(() => {
+			frame.current.classList.add('on');
+			setLoading(false);
+		}, 1000);
 	};
 
 	useEffect(() => {
@@ -29,8 +33,15 @@ function Gallery() {
 
 	return (
 		<Layout name={'Gallery'}>
+			{Loading && (
+				<img
+					className='loading'
+					src={`${process.env.PUBLIC_URL}/img/loading.gif`}
+				/>
+			)}
 			<button
 				onClick={() => {
+					setLoading(true);
 					frame.current.classList.remove('on');
 					getFlickr(interest_url);
 				}}>
@@ -38,6 +49,7 @@ function Gallery() {
 			</button>
 			<button
 				onClick={() => {
+					setLoading(true);
 					frame.current.classList.remove('on');
 					getFlickr(search_url);
 				}}>
