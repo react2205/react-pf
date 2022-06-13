@@ -2,6 +2,7 @@ import Layout from '../common/Layout';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import Masonry from 'react-masonry-component';
+import Popup from '../common/Popup';
 
 function Gallery() {
 	const frame = useRef(null);
@@ -9,6 +10,8 @@ function Gallery() {
 	const [Items, setItems] = useState([]);
 	const [Loading, setLoading] = useState(true);
 	const [EnableClick, setEnableClick] = useState(true);
+	const [Open, setOpen] = useState(false);
+	const [Index, setIndex] = useState(0);
 	const masonryOptions = { transitionDuration: '0.5s' };
 
 	const getFlickr = async (opt) => {
@@ -31,7 +34,7 @@ function Gallery() {
 		await axios.get(url).then((json) => {
 			//만약 검색 결과가 없다면 경고창 띄우고 종료
 			if (json.data.photos.photo.length === 0)
-				return alert('해당검색어의 결과이미자 없습니다.');
+				return alert('해당검색어의 결과이미지 없습니다.');
 			setItems(json.data.photos.photo);
 		});
 
@@ -72,89 +75,104 @@ function Gallery() {
 	}, []);
 
 	return (
-		<Layout name={'Gallery'}>
-			{Loading && (
-				<img
-					className='loading'
-					src={`${process.env.PUBLIC_URL}/img/loading.gif`}
-				/>
-			)}
-			<button
-				onClick={() => {
-					if (EnableClick) {
-						setEnableClick(false);
-						setLoading(true);
-						frame.current.classList.remove('on');
-						getFlickr({
-							type: 'interest',
-							count: 500,
-						});
-					}
-				}}>
-				Interest Gallery
-			</button>
-			{/* 미션 - 각 패널에 유저이미지와 아이디 출력하고 클릭시 해당 사용자의 이미지만 다시 출력 */}
-			<div className='searchBox'>
-				<input
-					type='text'
-					ref={input}
-					placeholder='검색어를 입력하세요'
-					onKeyUp={(e) => {
-						if (e.key === 'Enter') showSearch();
-					}}
-				/>
-				<button onClick={showSearch}>SEARCH</button>
-			</div>
+		<>
+			<Layout name={'Gallery'}>
+				{Loading && (
+					<img
+						className='loading'
+						src={`${process.env.PUBLIC_URL}/img/loading.gif`}
+					/>
+				)}
+				<button
+					onClick={() => {
+						if (EnableClick) {
+							setEnableClick(false);
+							setLoading(true);
+							frame.current.classList.remove('on');
+							getFlickr({
+								type: 'interest',
+								count: 50,
+							});
+						}
+					}}>
+					Interest Gallery
+				</button>
+				<div className='searchBox'>
+					<input
+						type='text'
+						ref={input}
+						placeholder='검색어를 입력하세요'
+						onKeyUp={(e) => {
+							if (e.key === 'Enter') showSearch();
+						}}
+					/>
+					<button onClick={showSearch}>SEARCH</button>
+				</div>
 
-			<div className='frame' ref={frame}>
-				<Masonry elementType={'div'} options={masonryOptions}>
-					{Items.map((item, idx) => {
-						return (
-							<article key={idx}>
-								<div className='inner'>
-									<div className='pic'>
-										<img
-											src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`}
-											alt=''
-										/>
-									</div>
-									<h2>{item.title}</h2>
-									<div className='profile'>
-										<img
-											src={`http://farm${item.farm}.staticflickr.com/${item.server}/buddyicons/${item.owner}.jpg`}
-											alt={item.owner}
-											onError={(e) => {
-												//해당 이미지요소의 소스이미지가 없어서 onError이벤트가 발생하면 src값을 대체이미지로 변경
-												e.target.setAttribute(
-													'src',
-													'https://www.flickr.com/images/buddyicon.gif'
-												);
-											}}
-										/>
-										<span
-											onClick={(e) => {
-												if (EnableClick) {
-													setEnableClick(false);
-													setLoading(true);
-													frame.current.classList.remove('on');
-
-													getFlickr({
-														type: 'user',
-														count: 50,
-														user: e.currentTarget.innerText,
-													});
-												}
+				<div className='frame' ref={frame}>
+					<Masonry elementType={'div'} options={masonryOptions}>
+						{Items.map((item, idx) => {
+							return (
+								<article key={idx}>
+									<div className='inner'>
+										<div
+											className='pic'
+											onClick={() => {
+												setOpen(true);
+												setIndex(idx);
 											}}>
-											{item.owner}
-										</span>
+											<img
+												src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`}
+												alt={item.title}
+											/>
+										</div>
+										<h2>{item.title}</h2>
+										<div className='profile'>
+											<img
+												src={`http://farm${item.farm}.staticflickr.com/${item.server}/buddyicons/${item.owner}.jpg`}
+												alt={item.owner}
+												onError={(e) => {
+													//해당 이미지요소의 소스이미지가 없어서 onError이벤트가 발생하면 src값을 대체이미지로 변경
+													e.target.setAttribute(
+														'src',
+														'https://www.flickr.com/images/buddyicon.gif'
+													);
+												}}
+											/>
+											<span
+												onClick={(e) => {
+													if (EnableClick) {
+														setEnableClick(false);
+														setLoading(true);
+														frame.current.classList.remove('on');
+
+														getFlickr({
+															type: 'user',
+															count: 50,
+															user: e.currentTarget.innerText,
+														});
+													}
+												}}>
+												{item.owner}
+											</span>
+										</div>
 									</div>
-								</div>
-							</article>
-						);
-					})}
-				</Masonry>
-			</div>
-		</Layout>
+								</article>
+							);
+						})}
+					</Masonry>
+				</div>
+			</Layout>
+
+			{Open && (
+				<Popup setOpen={setOpen}>
+					<img
+						src={`https://live.staticflickr.com/${Items[Index].server}/${Items[Index].id}_${Items[Index].secret}_b.jpg`}
+						alt={Items[Index].title}
+					/>
+				</Popup>
+			)}
+		</>
 	);
 }
 
