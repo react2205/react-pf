@@ -7,6 +7,7 @@ import Popup from '../common/Popup';
 function Gallery() {
 	const frame = useRef(null);
 	const input = useRef(null);
+	const pop = useRef(null);
 	const [Items, setItems] = useState([]);
 	const [Loading, setLoading] = useState(true);
 	const [EnableClick, setEnableClick] = useState(true);
@@ -114,7 +115,12 @@ function Gallery() {
 							return (
 								<article key={idx}>
 									<div className='inner'>
-										<div className='pic'>
+										<div
+											className='pic'
+											onClick={() => {
+												pop.current.open();
+												setIndex(idx);
+											}}>
 											<img
 												src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`}
 												alt={item.title}
@@ -158,14 +164,15 @@ function Gallery() {
 				</div>
 			</Layout>
 
-			{/* {Open && (
-				<Popup setOpen={setOpen}>
+			{/* 컴포넌트자체를 useRef로 참조 */}
+			<Popup ref={pop}>
+				{Items.length !== 0 && (
 					<img
 						src={`https://live.staticflickr.com/${Items[Index].server}/${Items[Index].id}_${Items[Index].secret}_b.jpg`}
 						alt={Items[Index].title}
 					/>
-				</Popup>
-			)} */}
+				)}
+			</Popup>
 		</>
 	);
 }
