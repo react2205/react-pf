@@ -33,7 +33,6 @@ function Gallery() {
 			if (json.data.photos.photo.length === 0)
 				return alert('해당검색어의 결과이미자 없습니다.');
 			setItems(json.data.photos.photo);
-			console.log(json.data.photos.photo);
 		});
 
 		setTimeout(() => {
@@ -66,8 +65,9 @@ function Gallery() {
 
 	useEffect(() => {
 		getFlickr({
-			type: 'interest',
+			type: 'user',
 			count: 50,
+			user: '164021883@N04',
 		});
 	}, []);
 
