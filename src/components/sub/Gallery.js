@@ -10,7 +10,6 @@ function Gallery() {
 	const [Items, setItems] = useState([]);
 	const [Loading, setLoading] = useState(true);
 	const [EnableClick, setEnableClick] = useState(true);
-	const [Open, setOpen] = useState(false);
 	const [Index, setIndex] = useState(0);
 	const masonryOptions = { transitionDuration: '0.5s' };
 
@@ -115,12 +114,7 @@ function Gallery() {
 							return (
 								<article key={idx}>
 									<div className='inner'>
-										<div
-											className='pic'
-											onClick={() => {
-												setOpen(true);
-												setIndex(idx);
-											}}>
+										<div className='pic'>
 											<img
 												src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`}
 												alt={item.title}
@@ -164,14 +158,14 @@ function Gallery() {
 				</div>
 			</Layout>
 
-			{Open && (
+			{/* {Open && (
 				<Popup setOpen={setOpen}>
 					<img
 						src={`https://live.staticflickr.com/${Items[Index].server}/${Items[Index].id}_${Items[Index].secret}_b.jpg`}
 						alt={Items[Index].title}
 					/>
 				</Popup>
-			)}
+			)} */}
 		</>
 	);
 }
