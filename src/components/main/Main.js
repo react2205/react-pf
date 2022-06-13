@@ -14,24 +14,26 @@ function Main() {
 	//useRef로 생성한 객체에 저장된 값은 컴포넌트가 재실행되더라도 값이 유지됨
 	//useRef에 담겨있는 값이 변경되더라도 컴포넌트가 재실행되지 않음
 	const pos = useRef([]);
-
 	const [Index, setIndex] = useState(0);
+	let secs = null;
 
 	const getPos = () => {
 		pos.current = [];
-		const secs = main.current.querySelectorAll('.myScroll');
+		secs = main.current.querySelectorAll('.myScroll');
 		for (const sec of secs) pos.current.push(sec.offsetTop);
 	};
 
 	const activation = () => {
-		const base = -300;
+		const base = -200;
 		const scroll = window.scrollY;
 		const btns = main.current.querySelectorAll('.scroll_navi li');
 
 		pos.current.map((pos, idx) => {
 			if (scroll >= pos + base) {
 				for (const btn of btns) btn.classList.remove('on');
+				for (const sec of secs) sec.classList.remove('on');
 				btns[idx].classList.add('on');
+				secs[idx].classList.add('on');
 			}
 		});
 	};
