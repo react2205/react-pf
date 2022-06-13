@@ -10,6 +10,12 @@ const Popup = forwardRef(({ children }, ref) => {
 	//자신의 open여부를 결정하는 state생성
 	const [Open, setOpen] = useState(false);
 
+	useEffect(() => {
+		Open
+			? (document.body.style.overflow = 'hidden')
+			: (document.body.style.overflow = 'auto');
+	}, [Open]);
+
 	//해당 컴포넌트에서 만들어지는 함수를 부모컴포넌트에서 사용가능하도록 외부로 반환가능
 	useImperativeHandle(ref, () => {
 		return {
@@ -17,16 +23,6 @@ const Popup = forwardRef(({ children }, ref) => {
 			close: () => setOpen(false), //팝업닫기 함수
 		};
 	});
-
-	useEffect(() => {
-		/*
-		document.body.style.overflow = 'hidden';
-
-		return () => {
-			document.body.style.overflow = 'auto';
-		};
-		*/
-	}, []);
 
 	return (
 		<>
