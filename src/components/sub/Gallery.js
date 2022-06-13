@@ -25,6 +25,9 @@ function Gallery() {
 		}
 
 		await axios.get(url).then((json) => {
+			//만약 검색 결과가 없다면 경고창 띄우고 종료
+			if (json.data.photos.photo.length === 0)
+				return alert('해당검색어의 결과이미자 없습니다.');
 			setItems(json.data.photos.photo);
 		});
 
@@ -50,7 +53,7 @@ function Gallery() {
 			frame.current.classList.remove('on');
 			getFlickr({
 				type: 'search',
-				count: 500,
+				count: 50,
 				tags: result,
 			});
 		}
@@ -59,7 +62,7 @@ function Gallery() {
 	useEffect(() => {
 		getFlickr({
 			type: 'interest',
-			count: 500,
+			count: 50,
 		});
 	}, []);
 
