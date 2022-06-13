@@ -1,8 +1,14 @@
-function Pics({ Scrolled }) {
-	console.log(Scrolled);
+function Pics({ Scrolled, start, base }) {
+	const position = Scrolled - start - base;
+
 	return (
 		<section id='pic' className='myScroll'>
-			Pics
+			<p
+				style={{
+					left: 100 + position,
+				}}>
+				FLICKR
+			</p>
 		</section>
 	);
 }
