@@ -37,7 +37,7 @@ const initMember = {
 	],
 };
 
-//각 리듀서 함수의 첫번째 인수: 관리할 데이터, 두번째 인수 변경할 데이터 (action객체로 전달받은)
+//각 리듀서 함수의 첫번째 인수: 관리할 데이터, 두번째 인수: 변경할 데이터 (action객체로 전달받은)
 //액션: 리듀서로 하여금 기존 state값을 변경하게 해주는 특별한 형태의 객체
 //{type: '액션타입', payload: '변경할데이터'}
 const memberReducer = (state = initMember, action) => {
