@@ -2,10 +2,13 @@ import Layout from '../common/Layout';
 import axios from 'axios';
 import { useEffect, useState, useRef } from 'react';
 import Popup from '../common/Popup';
+import { setYoutube } from '../../redux/action';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Youtube() {
 	const pop = useRef(null);
-	const [Vids, setVids] = useState([]);
+	const dispatch = useDispatch();
+	const Vids = useSelector((store) => store.youtubeReducer.youtube);
 	const [Index, setIndex] = useState(0);
 
 	const handlePopup = (index) => {
@@ -13,15 +16,21 @@ function Youtube() {
 		setIndex(index);
 	};
 
-	const fetchYoutube = () => {
+	const fetchYoutube = async () => {
 		const key = 'AIzaSyC77Pd__ju0Wqx_Umc-IuW7Cn2mWi_HVsk';
 		const playlist = 'PLHtvRFLN5v-W-izd7V4JH2L4-RTW0WRi3';
 		const num = 8;
 		const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=${key}&playlistId=${playlist}&maxResults=${num}`;
 
-		axios.get(url).then((json) => {
-			console.log(json);
-			setVids(json.data.items);
+		await axios.get(url).then((json) => {
+			//해당 컴포넌트에서 axios로 받아진 비동기 데이터를 지역state에 저장하는게 아닌
+			//action.js에서 가지고 setYoutube 액션 생성함수의 인수로 전달
+			//setYoutbue는 다음과 같은 액션 객체 반환
+			//{type: 'SET_YOUTUBE', payload: json.data.items}
+			const action = setYoutube(json.data.items);
+			//액션생성함수로 만들어진 action객체를 dispatch로 리듀서에 전달
+			dispatch(action);
+			//dispatch(setYoutube(json.data.items))
 		});
 	};
 

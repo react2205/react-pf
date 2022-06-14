@@ -53,6 +53,16 @@ const memberReducer = (state = initMember, action) => {
 	}
 };
 
+const youtubeReducer = (state = { youtube: [] }, action) => {
+	switch (action.type) {
+		case 'SET_YOUTUBE':
+			return { ...state, youtube: action.payload };
+
+		default:
+			return state;
+	}
+};
+
 //각 리듀서 데이터객체를 하나로 합쳐서 내보냄
-const reducers = combineReducers({ memberReducer });
+const reducers = combineReducers({ memberReducer, youtubeReducer });
 export default reducers;
