@@ -34,16 +34,27 @@ const Popup = forwardRef(({ children }, ref) => {
 						animate={{
 							opacity: 1,
 							scale: 1,
-							transition: { duration: 0.5, delay: 0 },
+							transition: { duration: 0.5 },
 						}}
-						exit={{ opacity: 0, scale: 0 }}
+						exit={{
+							opacity: 0,
+							x: '-100%',
+							transition: { duration: 0.5, delay: 0.3 },
+						}}
 						className='pop'>
-						<div className='con'>
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{
+								opacity: 1,
+								transition: { duration: 0.5, delay: 0.5 },
+							}}
+							exit={{ opacity: 0, transition: { duration: 0.3 } }}
+							className='con'>
 							{children}
 							<span className='close' onClick={() => setOpen(false)}>
 								close
 							</span>
-						</div>
+						</motion.div>
 					</motion.aside>
 				)}
 			</AnimatePresence>
