@@ -39,7 +39,7 @@ const Popup = forwardRef(({ children }, ref) => {
 						exit={{
 							opacity: 0,
 							x: '-100%',
-							transition: { duration: 0.5, delay: 0.3 },
+							transition: { duration: 0.5, delay: 0.8 },
 						}}
 						className='pop'>
 						<motion.div
@@ -48,12 +48,21 @@ const Popup = forwardRef(({ children }, ref) => {
 								opacity: 1,
 								transition: { duration: 0.5, delay: 0.5 },
 							}}
-							exit={{ opacity: 0, transition: { duration: 0.3 } }}
+							exit={{ opacity: 0, transition: { duration: 0.3, delay: 0.5 } }}
 							className='con'>
 							{children}
-							<span className='close' onClick={() => setOpen(false)}>
+							<motion.span
+								initial={{ opacity: 0, x: 50 }}
+								animate={{
+									opacity: 1,
+									x: 0,
+									transition: { duration: 0.5, delay: 1 },
+								}}
+								exit={{ opacity: 0, x: 50 }}
+								className='close'
+								onClick={() => setOpen(false)}>
 								close
-							</span>
+							</motion.span>
 						</motion.div>
 					</motion.aside>
 				)}
