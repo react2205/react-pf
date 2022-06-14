@@ -39,6 +39,7 @@ function Gallery() {
 		});
 
 		setTimeout(() => {
+			if (!frame.current) return;
 			frame.current.classList.add('on');
 			setLoading(false);
 
