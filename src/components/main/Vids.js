@@ -5,16 +5,19 @@ function Vids() {
 	return (
 		<section id='vids' className='myScroll'>
 			{Vids.map((vid, idx) => {
-				return (
-					<article key={idx}>
-						<div className='pic'>
-							<img
-								src={vid.snippet.thumbnails.standard.url}
-								alt={vid.snippet.title}
-							/>
-						</div>
-					</article>
-				);
+				if (idx < 4) {
+					return (
+						<article key={idx}>
+							<div className='pic'>
+								<img
+									src={vid.snippet.thumbnails.standard.url}
+									alt={vid.snippet.title}
+								/>
+							</div>
+							<p>{vid.snippet.title}</p>
+						</article>
+					);
+				}
 			})}
 		</section>
 	);
