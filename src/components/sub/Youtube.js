@@ -24,7 +24,7 @@ function Youtube() {
 
 		await axios.get(url).then((json) => {
 			//해당 컴포넌트에서 axios로 받아진 비동기 데이터를 지역state에 저장하는게 아닌
-			//action.js에서 가지고 setYoutube 액션 생성함수의 인수로 전달
+			//action.js에서 가지고온 setYoutube 액션 생성함수에 인수로 전달
 			//setYoutbue는 다음과 같은 액션 객체 반환
 			//{type: 'SET_YOUTUBE', payload: json.data.items}
 			const action = setYoutube(json.data.items);
