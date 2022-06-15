@@ -21,8 +21,11 @@ export const fetchFlickr = async (opt) => {
 	return await axios.get(url);
 };
 
-/*
-  redux로 관리되는 파일들은 컴포넌트 외부에서 전역으로 동작하기 때문에 부수효과를 발생시키지 않는 순수함수 형태로 제작
-  부수효과 (SideEffect) : DOM이나 컴포넌트가 제어해야 되는 화면의 변경점을 야기시키는 효과
-  순수함수 (Pure Function) : 부수효과를 발생시키지 않는 함수
-*/
+export const fetchYoutube = async () => {
+	const key = 'AIzaSyC77Pd__ju0Wqx_Umc-IuW7Cn2mWi_HVsk';
+	const playlist = 'PLHtvRFLN5v-W-izd7V4JH2L4-RTW0WRi3';
+	const num = 8;
+	const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=${key}&playlistId=${playlist}&maxResults=${num}`;
+
+	return await axios.get(url);
+};
