@@ -94,7 +94,12 @@ function Flickr() {
 							return (
 								<article key={idx}>
 									<div className='inner'>
-										<div className='pic'>
+										<div
+											className='pic'
+											onClick={() => {
+												setIndex(idx);
+												pop.current.open();
+											}}>
 											<img
 												src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`}
 												alt={item.title}
