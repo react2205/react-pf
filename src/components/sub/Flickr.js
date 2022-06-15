@@ -6,6 +6,7 @@ import Masonry from 'react-masonry-component';
 
 function Flickr() {
 	const { flickr } = useSelector((store) => store.flickrReducer);
+	console.log(flickr);
 	const dispatch = useDispatch();
 	const frame = useRef(null);
 	const input = useRef(null);

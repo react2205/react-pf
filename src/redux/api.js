@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const fetchFlickr = async (opt) => {
+	console.log(opt);
 	const key = '4612601b324a2fe5a1f5f7402bf8d87a';
 	const method_interest = 'flickr.interestingness.getList';
 	const method_search = 'flickr.photos.search';
@@ -17,7 +18,7 @@ export const fetchFlickr = async (opt) => {
 		url = `https://www.flickr.com/services/rest/?method=${method_user}&api_key=${key}&per_page=${opt.count}&nojsoncallback=1&format=json&user_id=${opt.user}`;
 	}
 
-	await axios.get(url);
+	return await axios.get(url);
 };
 
 /*
