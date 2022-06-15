@@ -14,11 +14,7 @@ function Flickr() {
 	const [Loading, setLoading] = useState(true);
 	const [EnableClick, setEnableClick] = useState(true);
 	//Opt값에 처음 api인수로 전달될 값으로 초기화
-	const [Opt, setOpt] = useState({
-		type: 'user',
-		count: 50,
-		user: '164021883@N04',
-	});
+	const [Opt, setOpt] = useState(null);
 	const masonryOptions = { transitionDuration: '0.5s' };
 
 	const endLoading = () => {

@@ -1,53 +1,16 @@
-//여러개의 데이터 리듀서를 합쳐주는 함수 import
 import { combineReducers } from 'redux';
 
-//초기 상태 데이터 지정
-const initMember = {
-	members: [
-		{
-			name: 'Julia',
-			position: 'CEO',
-			pic: 'member1.jpg',
-		},
-		{
-			name: 'David',
-			position: 'Vice President',
-			pic: 'member2.jpg',
-		},
-		{
-			name: 'Emily',
-			position: 'UI Designer',
-			pic: 'member3.jpg',
-		},
-		{
-			name: 'Paul',
-			position: 'Front-end Dev',
-			pic: 'member4.jpg',
-		},
-		{
-			name: 'Julia',
-			position: 'Back-en Dev',
-			pic: 'member5.jpg',
-		},
-		{
-			name: 'Peter',
-			position: 'Project Manager',
-			pic: 'member6.jpg',
-		},
-	],
-};
-
-//각 리듀서 함수의 첫번째 인수: 관리할 데이터, 두번째 인수: 변경할 데이터 (action객체로 전달받은)
-//액션: 리듀서로 하여금 기존 state값을 변경하게 해주는 특별한 형태의 객체
-//{type: '액션타입', payload: '변경할데이터'}
-const memberReducer = (state = initMember, action) => {
-	//액션타입에 따라 state값을 다르게 가공
+const memberReducer = (state = { members: [] }, action) => {
 	switch (action.type) {
-		//액션타입이 SET_MEMBERS이면 action.payload로 전달받은 데이터로 변경해서 반환
-		case 'SET_MEMBERS':
+		case 'MEMBER_START':
+			return { ...state };
+
+		case 'MEMBER_SUCCESS':
 			return { ...state, members: action.payload };
 
-		//그렇지 않으면 기본상태값 반환
+		case 'MEMBER_ERROR':
+			return { ...state, error: action.payload };
+
 		default:
 			return state;
 	}
@@ -85,7 +48,6 @@ const flickrReducer = (state = { flickr: [] }, action) => {
 	}
 };
 
-//각 리듀서 데이터객체를 하나로 합쳐서 내보냄
 const reducers = combineReducers({
 	memberReducer,
 	youtubeReducer,

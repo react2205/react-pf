@@ -24,6 +24,8 @@ function App() {
 			type: 'FLICKR_START',
 			Opt: { type: 'user', count: 50, user: '164021883@N04' },
 		});
+		dispatch({ type: 'YOUTUBE_START' });
+		dispatch({ type: 'MEMBER_START' });
 	}, []);
 
 	return (
