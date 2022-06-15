@@ -1,31 +1,31 @@
 import Layout from '../common/Layout';
+import Popup from '../common/Popup';
+import { useEffect, useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Masonry from 'react-masonry-component';
 
 function Flickr() {
+	const { flickr } = useSelector((store) => store.flickrReducer);
+	const dispatch = useDispatch();
+	const frame = useRef(null);
+	const input = useRef(null);
+	const pop = useRef(null);
+	const [Index, setIndex] = useState(0);
+	//Opt값에 처음 api인수로 전달될 값으로 초기화
+	const [Opt, setOpt] = useState({ type: 'interest', count: 50 });
+	const masonryOptions = { transitionDuration: '0.5s' };
+
+	//Opt값이 변경될때마다 해당 값을 FLICKR_START타입의 액션객체에 담아서 saga.js로 전달
+	useEffect(() => {
+		dispatch({ type: 'FLICKR_START', Opt });
+	}, [Opt]);
+
 	return (
 		<>
 			<Layout name={'Flickr'}>
-				{Loading && (
-					<img
-						className='loading'
-						src={`${process.env.PUBLIC_URL}/img/loading.gif`}
-					/>
-				)}
-				<button>Interest Gallery</button>
-				<div className='searchBox'>
-					<input
-						type='text'
-						ref={input}
-						placeholder='검색어를 입력하세요'
-						onKeyUp={(e) => {
-							if (e.key === 'Enter') showSearch();
-						}}
-					/>
-					<button onClick={showSearch}>SEARCH</button>
-				</div>
-
 				<div className='frame' ref={frame}>
 					<Masonry elementType={'div'} options={masonryOptions}>
-						{Items.map((item, idx) => {
+						{flickr.map((item, idx) => {
 							return (
 								<article key={idx}>
 									<div className='inner'>
@@ -57,12 +57,11 @@ function Flickr() {
 				</div>
 			</Layout>
 
-			{/* 컴포넌트자체를 useRef로 참조 */}
 			<Popup ref={pop}>
-				{Items.length !== 0 && (
+				{flickr.length !== 0 && (
 					<img
-						src={`https://live.staticflickr.com/${Items[Index].server}/${Items[Index].id}_${Items[Index].secret}_b.jpg`}
-						alt={Items[Index].title}
+						src={`https://live.staticflickr.com/${flickr[Index].server}/${flickr[Index].id}_${flickr[Index].secret}_b.jpg`}
+						alt={flickr[Index].title}
 					/>
 				)}
 			</Popup>
