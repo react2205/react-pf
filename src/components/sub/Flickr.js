@@ -6,24 +6,47 @@ import Masonry from 'react-masonry-component';
 
 function Flickr() {
 	const { flickr } = useSelector((store) => store.flickrReducer);
-	console.log(flickr);
 	const dispatch = useDispatch();
 	const frame = useRef(null);
 	const input = useRef(null);
 	const pop = useRef(null);
 	const [Index, setIndex] = useState(0);
+	const [Loading, setLoading] = useState(true);
 	//Opt값에 처음 api인수로 전달될 값으로 초기화
-	const [Opt, setOpt] = useState({ type: 'interest', count: 50 });
+	const [Opt, setOpt] = useState({
+		type: 'user',
+		count: 50,
+		user: '164021883@N04',
+	});
 	const masonryOptions = { transitionDuration: '0.5s' };
+
+	const endLoading = () => {
+		setTimeout(() => {
+			frame.current.classList.add('on');
+			setLoading(false);
+		}, 1000);
+	};
 
 	//Opt값이 변경될때마다 해당 값을 FLICKR_START타입의 액션객체에 담아서 saga.js로 전달
 	useEffect(() => {
 		dispatch({ type: 'FLICKR_START', Opt });
 	}, [Opt]);
 
+	//flickr데이터가 변경되면 endLoading을 호출해
+	//로딩바 제거하고 컴포넌트 frame출력
+	useEffect(() => {
+		endLoading();
+	}, [flickr]);
+
 	return (
 		<>
 			<Layout name={'Flickr'}>
+				{Loading && (
+					<img
+						className='loading'
+						src={`${process.env.PUBLIC_URL}/img/loading.gif`}
+					/>
+				)}
 				<div className='frame' ref={frame}>
 					<Masonry elementType={'div'} options={masonryOptions}>
 						{flickr.map((item, idx) => {
