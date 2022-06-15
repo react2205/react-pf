@@ -1,6 +1,6 @@
 import Layout from '../common/Layout';
 
-function Gallery() {
+function Flickr() {
 	return (
 		<>
 			<Layout name={'Flickr'}></Layout>
@@ -8,4 +8,4 @@ function Gallery() {
 	);
 }
 
-export default Gallery;
+export default Flickr;

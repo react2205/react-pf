@@ -63,6 +63,26 @@ const youtubeReducer = (state = { youtube: [] }, action) => {
 	}
 };
 
+const flickrReducer = (state = { flickr: [] }, action) => {
+	switch (action.type) {
+		case 'FLICKR_START':
+			return { ...state };
+
+		case 'FLICKR_SUCCESS':
+			return { ...state, flickr: action.payload };
+
+		case 'FLICKR_ERROR':
+			return { ...state, error: action.payload };
+
+		default:
+			return state;
+	}
+};
+
 //각 리듀서 데이터객체를 하나로 합쳐서 내보냄
-const reducers = combineReducers({ memberReducer, youtubeReducer });
+const reducers = combineReducers({
+	memberReducer,
+	youtubeReducer,
+	flickrReducer,
+});
 export default reducers;
