@@ -29,6 +29,11 @@ function Header({ type }) {
 						</NavLink>
 					</li>
 					<li>
+						<NavLink activeStyle={style} to='/flickr'>
+							FLICKR
+						</NavLink>
+					</li>
+					<li>
 						<NavLink activeStyle={style} to='/youtube'>
 							YOUTUBE
 						</NavLink>
