@@ -7,18 +7,31 @@ import 'swiper/css/pagination';
 
 function Visual() {
 	const cursor = useRef(null);
+	const frame = useRef(null);
+	let isCursor = false;
 	const mouseMove = (e) => {
+		if (!isCursor) return;
 		cursor.current.style.left = e.clientX + 'px';
 		cursor.current.style.top = e.clientY + 'px';
+		console.log(e.clientX);
 	};
 
 	useEffect(() => {
 		window.addEventListener('mousemove', mouseMove);
+		frame.current.addEventListener('mouseenter', () => {
+			isCursor = true;
+			cursor.current.style.display = 'block';
+		});
+		frame.current.addEventListener('mouseleave', () => {
+			isCursor = false;
+			cursor.current.style.display = 'none';
+		});
+
 		return () => window.removeEventListener('mousemove', mouseMove);
 	}, []);
 
 	return (
-		<figure id='visual' className='myScroll'>
+		<figure id='visual' className='myScroll' ref={frame}>
 			<Swiper
 				navigation={true}
 				modules={[Navigation, Pagination]}
@@ -40,6 +53,7 @@ function Visual() {
 				{[1, 2, 3, 4, 5, 6].map((num) => {
 					return (
 						<SwiperSlide
+							key={num}
 							onMouseEnter={() =>
 								(cursor.current.style = ` transform: translate(-50%, -50%)  scale(4) `)
 							}
