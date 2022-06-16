@@ -13,7 +13,7 @@ function Pics({ Scrolled, start, base }) {
 			{flickr.map((item, idx) => {
 				if (idx < 5) {
 					return (
-						<div className='pic'>
+						<div className='pic' key={idx}>
 							<img
 								src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`}
 								alt={item.title}
