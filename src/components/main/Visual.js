@@ -1,11 +1,22 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
-import { useEffect, useState, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 function Visual() {
+	const cursor = useRef(null);
+	const mouseMove = (e) => {
+		cursor.current.style.left = e.clientX + 'px';
+		cursor.current.style.top = e.clientY + 'px';
+	};
+
+	useEffect(() => {
+		window.addEventListener('mousemove', mouseMove);
+		return () => window.removeEventListener('mousemove', mouseMove);
+	}, []);
+
 	return (
 		<figure id='visual' className='myScroll'>
 			<Swiper
@@ -26,61 +37,28 @@ function Visual() {
 						spaceBetween: 40,
 					},
 				}}>
-				<SwiperSlide>
-					<div className='inner'>
-						<video
-							src={`${process.env.PUBLIC_URL}/img/vid1.mp4`}
-							muted
-							loop
-							autoPlay></video>
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className='inner'>
-						<video
-							src={`${process.env.PUBLIC_URL}/img/vid2.mp4`}
-							muted
-							loop
-							autoPlay></video>
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className='inner'>
-						<video
-							src={`${process.env.PUBLIC_URL}/img/vid3.mp4`}
-							muted
-							loop
-							autoPlay></video>
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className='inner'>
-						<video
-							src={`${process.env.PUBLIC_URL}/img/vid4.mp4`}
-							muted
-							loop
-							autoPlay></video>
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className='inner'>
-						<video
-							src={`${process.env.PUBLIC_URL}/img/vid5.mp4`}
-							muted
-							loop
-							autoPlay></video>
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className='inner'>
-						<video
-							src={`${process.env.PUBLIC_URL}/img/vid6.mp4`}
-							muted
-							loop
-							autoPlay></video>
-					</div>
-				</SwiperSlide>
+				{[1, 2, 3, 4, 5, 6].map((num) => {
+					return (
+						<SwiperSlide
+							onMouseEnter={() =>
+								(cursor.current.style = `transform: scale(4)`)
+							}
+							onMouseLeave={() =>
+								(cursor.current.style = `transform: scale(1)`)
+							}>
+							<div className='inner'>
+								<video
+									src={`${process.env.PUBLIC_URL}/img/vid${num}.mp4`}
+									muted
+									loop
+									autoPlay></video>
+							</div>
+						</SwiperSlide>
+					);
+				})}
 			</Swiper>
+
+			<div className='cursor' ref={cursor}></div>
 		</figure>
 	);
 }
