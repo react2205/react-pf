@@ -2,14 +2,28 @@ import { useState, forwardRef, useImperativeHandle } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 
-function Menu() {
-	const [Open, setOpen] = useState(true);
+const Menu = forwardRef((props, ref) => {
+	const [Open, setOpen] = useState(false);
 	const active = { color: 'aqua' };
+
+	useImperativeHandle(ref, () => {
+		return {
+			toggle: () => setOpen(!Open),
+		};
+	});
 
 	return (
 		<AnimatePresence>
 			{Open && (
-				<nav id='mobileGnb'>
+				<motion.nav
+					id='mobileGnb'
+					initial={{ x: -320, opacity: 0 }}
+					animate={{
+						x: 0,
+						opacity: 1,
+						transition: { duration: 0.5 },
+					}}
+					exit={{ x: -320, opacity: 0 }}>
 					<h1>
 						<NavLink exact to='/'>
 							DCODELAB
@@ -48,10 +62,10 @@ function Menu() {
 							</NavLink>
 						</li>
 					</ul>
-				</nav>
+				</motion.nav>
 			)}
 		</AnimatePresence>
 	);
-}
+});
 
 export default Menu;
