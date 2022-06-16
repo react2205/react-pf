@@ -27,22 +27,58 @@ function Visual() {
 					},
 				}}>
 				<SwiperSlide>
-					<div className='inner'>1</div>
+					<div className='inner'>
+						<video
+							src={`${process.env.PUBLIC_URL}/img/vid1.mp4`}
+							muted
+							loop
+							autoPlay></video>
+					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className='inner'>2</div>
+					<div className='inner'>
+						<video
+							src={`${process.env.PUBLIC_URL}/img/vid2.mp4`}
+							muted
+							loop
+							autoPlay></video>
+					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className='inner'>3</div>
+					<div className='inner'>
+						<video
+							src={`${process.env.PUBLIC_URL}/img/vid3.mp4`}
+							muted
+							loop
+							autoPlay></video>
+					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className='inner'>4</div>
+					<div className='inner'>
+						<video
+							src={`${process.env.PUBLIC_URL}/img/vid4.mp4`}
+							muted
+							loop
+							autoPlay></video>
+					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className='inner'>5</div>
+					<div className='inner'>
+						<video
+							src={`${process.env.PUBLIC_URL}/img/vid5.mp4`}
+							muted
+							loop
+							autoPlay></video>
+					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className='inner'>6</div>
+					<div className='inner'>
+						<video
+							src={`${process.env.PUBLIC_URL}/img/vid6.mp4`}
+							muted
+							loop
+							autoPlay></video>
+					</div>
 				</SwiperSlide>
 			</Swiper>
 		</figure>
