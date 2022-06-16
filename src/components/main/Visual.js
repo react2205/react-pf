@@ -41,10 +41,10 @@ function Visual() {
 					return (
 						<SwiperSlide
 							onMouseEnter={() =>
-								(cursor.current.style = `transform: scale(4)`)
+								(cursor.current.style = ` transform: translate(-50%, -50%)  scale(4) `)
 							}
 							onMouseLeave={() =>
-								(cursor.current.style = `transform: scale(1)`)
+								(cursor.current.style = ` transform: translate(-50%, -50%)  scale(1) `)
 							}>
 							<div className='inner'>
 								<video
