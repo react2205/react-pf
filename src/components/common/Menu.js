@@ -21,9 +21,10 @@ const Menu = forwardRef((props, ref) => {
 					animate={{
 						x: 0,
 						opacity: 1,
-						transition: { duration: 0.5 },
+						transition: { duration: 0.5 /*type: 'spring', stiffness: 100*/ },
 					}}
-					exit={{ x: -320, opacity: 0 }}>
+					exit={{ x: -320, opacity: 0 }}
+					onClick={() => setOpen(!Open)}>
 					<h1>
 						<NavLink exact to='/'>
 							DCODELAB
