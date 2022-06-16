@@ -3,6 +3,7 @@ import Popup from '../common/Popup';
 import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Masonry from 'react-masonry-component';
+import * as types from '../../redux/actionType';
 
 function Flickr() {
 	const { flickr } = useSelector((store) => store.flickrReducer);
@@ -54,7 +55,7 @@ function Flickr() {
 
 	//Opt값이 변경될때마다 해당 값을 FLICKR_START타입의 액션객체에 담아서 saga.js로 전달
 	useEffect(() => {
-		dispatch({ type: 'FLICKR_START', Opt });
+		dispatch({ type: types.FLICKR.start, Opt });
 	}, [Opt]);
 
 	//flickr데이터가 변경되면 endLoading을 호출해

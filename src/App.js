@@ -15,17 +15,18 @@ import Join from './components/sub/Join';
 
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import * as types from './redux/actionType';
 
 function App() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch({
-			type: 'FLICKR_START',
+			type: types.FLICKR.start,
 			Opt: { type: 'user', count: 50, user: '164021883@N04' },
 		});
-		dispatch({ type: 'YOUTUBE_START' });
-		dispatch({ type: 'MEMBER_START' });
+		dispatch({ type: types.YOUTUBE.start });
+		dispatch({ type: types.MEMBER.start });
 	}, []);
 
 	return (
