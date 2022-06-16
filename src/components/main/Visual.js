@@ -1,24 +1,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 function Visual() {
-	const [Num, setNum] = useState(3);
-
-	const setSwiperNum = () => {
-		const wid = window.innerWidth;
-		wid < 1180 ? setNum(1) : setNum(3);
-	};
-
-	useEffect(() => {
-		setSwiperNum();
-		window.addEventListener('resize', setSwiperNum);
-		return () => window.removeEventListener('resize', setSwiperNum);
-	}, []);
-
 	return (
 		<figure id='visual' className='myScroll'>
 			<Swiper
@@ -27,8 +14,18 @@ function Visual() {
 				pagination={{ clickable: true }}
 				spaceBetween={50}
 				loop={true}
-				slidesPerView={Num}
-				centeredSlides={true}>
+				centeredSlides={true}
+				breakpoints={{
+					// when window width is >= 320px
+					320: {
+						slidesPerView: 1,
+						spaceBetween: 20,
+					},
+					1180: {
+						slidesPerView: 3,
+						spaceBetween: 40,
+					},
+				}}>
 				<SwiperSlide>
 					<div className='inner'>1</div>
 				</SwiperSlide>
