@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
 function Pics({ Scrolled, start, base }) {
-	const { flickr } = useSelector((store) => store.flickrReducer);
+	const imgs = useSelector((store) => store.flickr.data);
 	let position = 0;
 	if (start) position = Scrolled - start - base;
 
@@ -10,7 +10,7 @@ function Pics({ Scrolled, start, base }) {
 			<p style={{ left: 100 + position }}>FLICKR</p>
 			<h3 style={{ left: 100 + position / 2 }}>FLICKR</h3>
 
-			{flickr.map((item, idx) => {
+			{imgs.map((item, idx) => {
 				if (idx < 5) {
 					return (
 						<div className='pic' key={idx}>
