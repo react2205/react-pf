@@ -13,7 +13,6 @@ function Visual() {
 		if (!isCursor) return;
 		cursor.current.style.left = e.clientX + 'px';
 		cursor.current.style.top = e.clientY + 'px';
-		console.log(e.clientX);
 	};
 
 	useEffect(() => {

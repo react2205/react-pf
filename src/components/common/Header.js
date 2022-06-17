@@ -28,11 +28,6 @@ function Header({ type }) {
 							</NavLink>
 						</li>
 						<li>
-							<NavLink activeStyle={style} to='/gallery'>
-								GALLERY
-							</NavLink>
-						</li>
-						<li>
 							<NavLink activeStyle={style} to='/flickr'>
 								FLICKR
 							</NavLink>

@@ -84,7 +84,6 @@
 
       //두개의 값이 모두 true를 리턴하면 (모든 DOM소스가 로딩완료되면)
       if (loadedImg && loadedVid) {
-        console.log('mask-hide')
         mask.classList.add('off');
 
         setTimeout(() => {
@@ -114,7 +113,6 @@
         imgDOM.forEach((img) => {
           img.onload = () => {
             countImg++;
-            console.log('img-loaded', countImg);
             if (countImg === lenImg) {
               res(true);
             }
@@ -132,7 +130,6 @@
         vidDOM.forEach((vid) => {
           vid.onloadeddata = () => {
             countVid++;
-            console.log('video-loaded', countVid);
             if (countVid === lenVid) {
               res(true);
             }

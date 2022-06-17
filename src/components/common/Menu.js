@@ -43,11 +43,6 @@ const Menu = forwardRef((props, ref) => {
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to='/gallery' activeStyle={active}>
-								GALLERY
-							</NavLink>
-						</li>
-						<li>
 							<NavLink to='/flickr' activeStyle={active}>
 								FLICKR
 							</NavLink>

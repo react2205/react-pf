@@ -6,7 +6,6 @@ import Footer from './components/common/Footer';
 import Main from './components/main/Main';
 //sub
 import Department from './components/sub/Department';
-import Gallery from './components/sub/Gallery';
 import Flickr from './components/sub/Flickr';
 import Community from './components/sub/Community';
 import Youtube from './components/sub/Youtube';
@@ -38,7 +37,6 @@ function App() {
 
 			<Route path='/department' component={Department} />
 			<Route path='/community' component={Community} />
-			<Route path='/gallery' component={Gallery} />
 			<Route path='/flickr' component={Flickr} />
 			<Route path='/youtube' component={Youtube} />
 			<Route path='/location' component={Location} />

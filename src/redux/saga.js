@@ -35,7 +35,6 @@ export function* callYoutube() {
 export function* returnMember() {
 	try {
 		const response = yield call(fetchMember);
-		console.log(response);
 		yield put({ type: types.MEMBER.success, payload: response.data.members });
 	} catch (err) {
 		yield put({ type: types.MEMBER.err, payload: err });
