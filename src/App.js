@@ -15,12 +15,14 @@ import Join from './components/sub/Join';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchMember } from './redux/memberSlice';
+import { fetchYoutube } from './redux/youtubeSlice';
 
 function App() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(fetchMember());
+		dispatch(fetchYoutube());
 	}, []);
 
 	return (
