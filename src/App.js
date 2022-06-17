@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchMember } from './redux/memberSlice';
 import { fetchYoutube } from './redux/youtubeSlice';
+import { fetchFlickr } from './redux/flickrSlice';
 
 function App() {
 	const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
 	useEffect(() => {
 		dispatch(fetchMember());
 		dispatch(fetchYoutube());
+		dispatch(fetchFlickr({ type: 'user', count: 5, user: '164021883@N04' }));
 	}, []);
 
 	return (
