@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import Popup from '../common/Popup';
 
 function Vids() {
-	const Vids = useSelector((store) => store.youtubeReducer.youtube);
+	const Vids = useSelector((store) => store.youtube.data);
 	const [Index, setIndex] = useState(0);
 	const pop = useRef(null);
 

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 function Youtube() {
 	const pop = useRef(null);
-	const Vids = useSelector((store) => store.youtubeReducer.youtube);
+	const Vids = useSelector((store) => store.youtube.data);
 	const [Index, setIndex] = useState(0);
 
 	const handlePopup = (index) => {
