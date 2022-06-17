@@ -14,18 +14,13 @@ import Join from './components/sub/Join';
 
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import * as types from './redux/actionType';
+import { fetchMember } from './redux/memberSlice';
 
 function App() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch({
-			type: types.FLICKR.start,
-			Opt: { type: 'user', count: 50, user: '164021883@N04' },
-		});
-		dispatch({ type: types.YOUTUBE.start });
-		dispatch({ type: types.MEMBER.start });
+		dispatch(fetchMember());
 	}, []);
 
 	return (
